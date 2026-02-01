@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>融化的信件</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        /* 从上到下，从浅色到深色的渐变背景 */
+        body {
+            background: linear-gradient(to bottom, 
+                #6c9ecc 0%, 
+                #4a7cb3 15%, 
+                #285a9a 35%, 
+                #1e4372 65%, 
+                #142c4a 85%, 
+                #0a1522 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: transparent;
+            border-radius: 20px;
+            padding: 40px;
+            border: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(128, 222, 234, 0.7), 
+                rgba(0, 172, 193, 0.7), 
+                rgba(128, 222, 234, 0.7), 
+                transparent);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            color: #a3d9e5;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(163, 217, 229, 0.5);
+            letter-spacing: 2px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(163, 217, 229, 0.2);
+            font-weight: 300;
+        }
+        
+        /* 内容区域 */
+        .content-area {
+            line-height: 1.9;
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+        }
+        
+        /* 统一的段落样式 */
+        .story-paragraph {
+            margin-bottom: 35px;
+            color: #d4eef5;
+            line-height: 1.9;
+            text-indent: 2em;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 15px auto;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .story-paragraph {
+                font-size: 1.05rem;
+                margin-bottom: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+            }
+            
+            .story-paragraph {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">融化的信件</h1>
+        
+        <div class="content-area">
+            <p class="story-paragraph">
+                你盯着屏幕上那个坐标看了很久，最终关掉页面，拿起手机拨通了那个几乎从未主动联系过的号码。
+            </p >
+            
+            <p class="story-paragraph">
+                电话响了三声后被接起，对面传来平静无波的声音："小月？"
+            </p >
+            
+            <p class="story-paragraph">
+                "爸，"你听到自己的声音有些干涩，"我想请你帮我查个人。"
+            </p >
+            
+            <p class="story-paragraph">
+                对面沉默了两秒："名字，基本情况。"
+            </p >
+            
+            <p class="story-paragraph">
+                "祈霜，女，看起来十八九岁，白头发，浅色眼睛。最后出现的地点是临新区明水湾。"你停顿了一下，"她可能遇到麻烦了。"
+            </p >
+            
+            <p class="story-paragraph">
+                "知道了。"电话挂断，没有多余一句询问。
+            </p >
+            
+            <p class="story-paragraph">
+                放下手机，你坐在黑暗里等了四十分钟。手机屏幕亮起时，你几乎立刻抓起来。
+            </p >
+            
+            <p class="story-paragraph">
+                是一封加密邮件，需要家族内部密钥才能打开。你输入那串几乎刻在DNA里的密码，文件展开——
+            </p >
+            
+            <p class="story-paragraph">
+                明水湾7栋业主信息、租客登记表、近一个月出入记录、周边监控分析报告……甚至还有周姓租客的背景调查，包括他名下的境外账户和可疑的人际往来。
+            </p >
+            
+            <p class="story-paragraph">
+                最后一页是照片。是祈霜在小区门口喂猫的照片，她在便利店门口犹豫的照片，她被一个男人半扶半拉地带进小区的照片。
+            </p >
+            
+            <p class="story-paragraph">
+                邮件末尾只有一句话："已通知临新区分局，今晚就会行动。"
+            </p >
+            
+            <p class="story-paragraph">
+                你猛地站起来，抓起外套就要出门，手机却在这时响了。是你父亲的电话。
+            </p >
+            
+            <p class="story-paragraph">
+                "小月，"父亲的声音依然平静，"留在家里。警方会处理。"
+            </p >
+            
+            <p class="story-paragraph">
+                "可是祈霜她——"
+            </p >
+            
+            <p class="story-paragraph">
+                "专业人员比你去添乱更有用。"电话挂断，对面的人显然不想多说。
+            </p >
+            
+            <p class="story-paragraph">
+                你只能坐回桌前，愣愣地刷新着邮箱，看着什么都没有的电脑，大脑放空。
+            </p >
+            
+            <p class="story-paragraph">
+                晚上九点十七分，新邮件的邮件在你麻木的动作下被刷新了出来："目标已安全救出。嫌疑人控制。女孩有轻微外伤，已送医检查。"
+            </p >
+            
+            <p class="story-paragraph">
+                附着一张祈霜裹着毯子坐在救护车里的照片，她眼神茫然，手里紧紧攥着那个装工资的小布袋。
+            </p >
+            
+            <p class="story-paragraph">
+                你没有回复邮件，只是把手机倒扣在桌上，蜷缩在椅子里。黑暗中，祈霜抱着膝盖的侧影、救护车里茫然的眼神在你脑海里反复浮现，愧疚像细密的针，轻轻扎着心脏。你救了她，却又觉得自己用一种隐秘的、越界的方式，惊扰了她本就脆弱的世界。你开始害怕与她见面，害怕她的道谢，更害怕自己无法面对她清澈的目光——那目光里若映出你身后家族的庞大阴影，所有的善意似乎都会变得不纯粹。
+            </p >
+            
+            <p class="story-paragraph">
+                你再也没有登上过那个叫我是小神仙的论坛。那个曾承载着偶然交集的页面，连同那些隐秘的求助与救助，被你彻底尘封在浏览器的历史记录里，再也没有点开过。
+            </p >
+            
+            <p class="story-paragraph">
+                下雪了。
+            </p >
+            
+            <p class="story-paragraph">
+                每当这个时候你就会想起那个喜欢着冬天的小狐狸。你从来不理解怎么会有人喜欢这样寒冷的季节。
+            </p >
+            
+            <p class="story-paragraph">
+                雪花落在你的肩上，很快就消失不见，落在地上的那些也是。在这座城市，这些雪花从来不会停留多久。
+            </p >
+            
+            <p class="story-paragraph">
+                无论你是否还记得那只意外遇见的小狐狸，你们的故事也停留在了那里。没有后续，没有重逢，也没有意外。
+            </p >
+            
+            <p class="story-paragraph">
+                那封被写在白雪上的信悄悄融化，不会有人知道那些内容。
+            </p >
+        </div>
+    </div>
+    
+    <script>
+        // 页面加载时的效果
+        window.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
+</body>
+</html>

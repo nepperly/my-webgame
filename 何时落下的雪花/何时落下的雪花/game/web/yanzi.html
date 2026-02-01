@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帖子-震惊！某燕子精竟然……</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+           color: #80deea;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 172, 193, 0.3);
+        }
+        
+        /* 帖子内容 - 添加首行缩进 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+        }
+        
+        .post-content p {
+            margin-bottom: 15px;
+            text-indent: 2em; /* 首行缩进2个字符 */
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+        
+        /* 评论区域 */
+        .comments-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .comments-title {
+            color: #80deea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        /* 评论项 */
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.1);
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            color: #ffcc80;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .comment-content {
+            color: #b2ebf2;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        /* 回复评论 */
+        .comment-reply {
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #80deea;
+        }
+        
+        .comment-reply:last-child {
+            margin-bottom: 0;
+        }
+        
+        .reply-author {
+            color: #80deea;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .reply-content {
+            color: #b2ebf2;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        /* 点赞和回复图标（无功能）- 只保留评论部分的，回复部分已移除 */
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-icon {
+            color: #80deea;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+        }
+        
+        .action-icon i {
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+            }
+            
+            .comment-reply {
+                margin-left: 15px;
+                padding: 10px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .comment-actions {
+                flex-wrap: wrap;
+            }
+            
+            .comment-reply {
+                margin-left: 10px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <h1 class="post-title">震惊！著名的某燕子精竟然……</h1>
+            
+            <div class="post-content">
+                <p>家人们，刚吃到的瓜，说真的有点无语住了！某个燕子精，一直立着"纯良修行、独来独往"的人设，结果私下私生活一言难尽。</p >
+                
+                <p>有山间修行的小妖扒出，这燕子精近期频繁和不同精怪同框出入山林结界，前几天刚被拍到和一只夜鹭精牵手逛溪边夜市，隔天又被偶遇和另一位松鼠精同回洞府。</p >
+                
+                <p>关键是他之前在妖精集会里还说"现阶段只想专心修炼，不考虑结契"，转头就被抓包多次约会。</p >
+                
+                <p>说不上是什么大瓜，但这种立独修人设又私下放飞的操作，在妖精圈里也挺败好感的。你们觉得这算私生活不检点吗？</p >
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    发布时间：<span class="post-date">2023.3.14</span>
+                </div>
+                <div class="post-author">
+                    发布人：<span class="author-name">还下不下雪了</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 评论区域 -->
+        <div class="comments-container">
+            <h2 class="comments-title"><i class="far fa-comments"></i> 评论</h2>
+            
+            <!-- 评论1 -->
+            <div class="comment" id="comment1">
+                <div class="comment-author">晏孜</div>
+                <div class="comment-content">
+                    薛仁，你要是不想干了可以直接和我说。今晚回去给我等着。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 128
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">还下不下雪了</div>
+                    <div class="reply-content">我靠我不是屏蔽你了吗！</div>
+                </div>
+                
+                <!-- 回复2 -->
+                <div class="comment-reply">
+                    <div class="reply-author">晏孜</div>
+                    <div class="reply-content">那我这个人员管理算是白干了。</div>
+                </div>
+            </div>
+            
+            <!-- 评论2 -->
+            <div class="comment" id="comment2">
+                <div class="comment-author">天天晒太阳的鱼</div>
+                <div class="comment-content">
+                    笑死我了，一进来看以为是什么劲爆的八卦，结果正主来了啊啊啊啊啊啊。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 67
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论3 -->
+            <div class="comment" id="comment3">
+                <div class="comment-author">睡觉之后我将逆袭</div>
+                <div class="comment-content">
+                    刚来，这都是什么情况？
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 42
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">西瓜西瓜</div>
+                    <div class="reply-content">
+                        简单来说就是发布帖子的人想蛐蛐晏孜，结果忘了人家的工作是干什么的，屏蔽根本没有用，结果现在被发现了。
+                    </div>
+                </div>
+                
+                <!-- 回复2 -->
+                <div class="comment-reply">
+                    <div class="reply-author">睡觉之后我将逆袭</div>
+                    <div class="reply-content">rip。那我只能祝帖主好运了。</div>
+                </div>
+            </div>
+            
+            <!-- 评论4 -->
+            <div class="comment" id="comment4">
+                <div class="comment-author">瓶中草</div>
+                <div class="comment-content">
+                    所以为什么是回去给我等着？
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 51
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        // 滚动效果
+        const comments = document.querySelectorAll('.comment');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        comments.forEach(comment => {
+            comment.style.opacity = '0';
+            comment.style.transform = 'translateY(20px)';
+            comment.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(comment);
+        });
+    </script>
+</body>
+</html>

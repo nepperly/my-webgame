@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索-临新区介绍</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+            color: #80deea;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(128, 222, 234, 0.5);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(128, 222, 234, 0.3);
+        }
+        
+        /* 区域特色图标 */
+        .region-icon {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #80deea;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        /* 文章图片 */
+        .post-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(128, 222, 234, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+        
+        .image-caption {
+            text-align: center;
+            color: #b2ebf2;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            margin-bottom: 25px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        /* 帖子内容 - 添加首行缩进 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+            text-align: justify;
+        }
+        
+        .post-content p {
+            margin-bottom: 22px;
+            text-indent: 2em;
+        }
+        
+        /* 高亮关键词 */
+        .highlight {
+            color: #ffcc80;
+            font-weight: bold;
+        }
+        
+        /* 数据展示 */
+        .data-box {
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid #80deea;
+        }
+        
+        .data-title {
+            color: #80deea;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .data-content {
+            color: #b2ebf2;
+            line-height: 1.6;
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+            margin-top: 20px;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+                margin-bottom: 18px;
+            }
+            
+            .region-icon {
+                font-size: 2rem;
+            }
+            
+            .post-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+                margin-bottom: 15px;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .post-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <div class="region-icon">
+                <i class="fas fa-city"></i>
+            </div>
+            <h1 class="post-title">临新区介绍</h1>
+            
+            <!-- 添加的图片代称img.jpg -->
+            <img src="../resource/city.jpg" alt="临新区规划效果图" class="post-image">
+            <div class="image-caption">临新区总体规划效果图</div>
+            
+            <div class="post-content">
+                <p><span class="highlight">临新区</span>是本市重点规划建设的新型城市功能区，位于城市发展主轴延伸带，总规划面积约98平方公里。该区域在规划建设中，充分遵循人与自然和谐共生的理念，注重整体生态格局的构建与可持续发展。</p>
+                
+                <p>在地理环境方面，临新区北靠<span class="highlight">苍梧山生态屏障</span>，南接<span class="highlight">清澜江水系</span>，形成了天然的山体庇护与水系滋养的自然基底。区域整体地势呈北高南低态势，有利于空气流通与自然排水。城市规划团队在设计时，充分考量了传统环境美学中的合理要素，建筑布局注重采光通风，道路网络规划流畅有序，公共绿地和生态廊道系统完整，形成了层次分明的景观结构。</p>
+                
+                <div class="data-box">
+                    <div class="data-title"><i class="fas fa-chart-line"></i> 生态建设数据</div>
+                    <div class="data-content">
+                        新区保留了约<span class="highlight">35%</span>的原生植被覆盖区，建设了贯通全域的生态水系网络和绿色基础设施。监测数据表明，该区域空气质量常年优于本市平均水平，热岛效应显著低于传统建成区，生物多样性保持良好。
+                    </div>
+                </div>
+                
+                <p>近年来，临新区已逐步形成<span class="highlight">高新技术</span>、<span class="highlight">文化创意</span>、<span class="highlight">生态康养</span>三大产业集群，公共服务设施配套完善，吸引了众多优质企业和机构入驻。该区域的建设实践，体现了现代城市规划与传统环境智慧相结合的发展思路，为居民创造了宜居宜业的高品质城市空间。</p>
+                
+                <p>当前，临新区正按照总体规划稳步推进各项建设，致力于打造成为<span class="highlight">生态优良</span>、<span class="highlight">产业繁荣</span>、<span class="highlight">配套完善</span>、<span class="highlight">人文和谐</span>的现代化城市示范区。</p>
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    信息更新时间：<span class="post-date">2023.10.15</span>
+                </div>
+                <div class="post-author">
+                    信息提供：<span class="author-name">城市规划局</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        dataBox.style.opacity = '0';
+        dataBox.style.transform = 'scale(0.95)';
+        dataBox.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(dataBox);
+        
+        // 图片错误处理
+        postImage.onerror = function() {
+            this.style.display = 'none';
+            document.querySelector('.image-caption').innerHTML = '图片加载失败，请检查img.jpg文件是否存在';
+            document.querySelector('.image-caption').style.color = '#ff6b6b';
+        };
+    </script>
+</body>
+</html>
