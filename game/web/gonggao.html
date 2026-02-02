@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帖子-【置顶公告】关于近期论坛遭遇非法入侵及安全升级的说明（必读）</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+            color: #80deea; /* 安全主题颜色 */
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 172, 193, 0.3);
+        }
+        
+        /* 帖子内容 - 添加首行缩进 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+        }
+        
+        .post-content p {
+            margin-bottom: 15px;
+            text-indent: 2em; /* 首行缩进2个字符 */
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+        
+        /* 评论区域 */
+        .comments-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .comments-title {
+            color: #80deea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        /* 评论项 */
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.1);
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            color: #ffcc80;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .comment-content {
+            color: #b2ebf2;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        /* 回复评论 */
+        .comment-reply {
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #80deea;
+        }
+        
+        .comment-reply:last-child {
+            margin-bottom: 0;
+        }
+        
+        .reply-author {
+            color: #80deea;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .reply-content {
+            color: #b2ebf2;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        /* 点赞和回复图标（无功能）- 只保留评论部分的，回复部分已移除 */
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-icon {
+            color: #80deea;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+        }
+        
+        .action-icon i {
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+            }
+            
+            .comment-reply {
+                margin-left: 15px;
+                padding: 10px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .comment-actions {
+                flex-wrap: wrap;
+            }
+            
+            .comment-reply {
+                margin-left: 10px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <h1 class="post-title">【置顶公告】关于近期论坛遭遇非法入侵及安全升级的说明（必读）</h1>
+            
+            <div class="post-content">
+                <p>各位道友、妖怪安好：</p>
+                
+                <p>近日，"我是小神仙" 论坛遭遇了一场有组织、有针对性的非法入侵与信息刺探事件。入侵者手段诡谲隐蔽，行事极为猖獗，其核心目标并非仅仅是窃取普通用户数据，还妄图逆向解析论坛核心运行协议，非法定位各位道友、妖怪的现实坐标，甚至试图植入可污染心神、干扰灵脉的恶意符文，其行为已严重威胁平台安全与各位的自身安危。</p>
+                
+                <p>需向各位说明的是，本论坛不仅是各位沟通交流修行之道的聚合平台，更承担着各位私密信息的统一管控职责——此举旨在精准监测各位的修行发展与行动轨迹，为大家的修行之路规避潜在风险、保驾护航。在此郑重承诺，正常情况下，若无异常波动，我们绝不会主动监视、调取各位的活动信息，始终坚守用户隐私底线。</p>
+                
+                <p>经核查，在本次攻击峰值期间，部分道友、妖怪可能已短暂遭遇以下一种或多种异常情况：一是浏览帖子时，页面文字出现无法理解的扭曲、重叠，或闪现不属于本论坛的陌生符文、诡异印记；二是喂信功能出现短暂错乱，收到空白信息、乱码内容，或来源不明的匿名消息；三是灵觉敏锐者，可能感受到轻微的神识刺痛、心神干扰，或修行气息出现短暂紊乱；四是少数区域版块访问中断，出现无法加载、无法进入的情况。</p>
+                
+                <p>针对本次非法入侵事件，论坛安全部门已第一时间启动最高级别的应急响应机制，全力拦截入侵攻击、清除恶意程序、修复系统漏洞。目前，论坛核心功能已恢复正常，安全升级工作正在有序推进，后续将持续强化安全防护体系，新增多重灵脉加密屏障，坚决杜绝此类事件再次发生。</p>
+                
+                <p>此外，由于本次的攻击行为，导致我们不得不重置各位所设置的用户密码。因此，特此通知各位修改自己的密码，使用更高级更复杂的密码，防止意外的发生。</p>
+                
+                <p>现初始密码为：01234567</p>
+                
+                <p>请各位道友、妖怪不必过度恐慌，若仍存在功能异常、心神不适等情况，可通过论坛客服通道提交问题，我们将安排专人第一时间跟进处理。同时，提醒各位切勿点击陌生链接、接收未知符文文件，切勿泄露自身核心修行信息与现实坐标，共同筑牢平台安全防线。</p>
+                
+                <p>感谢各位的理解支持与耐心等候，"我是小神仙" 论坛将始终与各位并肩同行，守护好每一位用户的隐私安全与修行安宁。</p>
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    发布时间：<span class="post-date">2024.1.1</span>
+                </div>
+                <div class="post-author">
+                    发布人：<span class="author-name">论坛安全部门、论坛人员管理部门</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 评论区域 -->
+        <div class="comments-container">
+            <h2 class="comments-title"><i class="far fa-comments"></i> 评论</h2>
+            
+            <!-- 评论1 -->
+            <div class="comment" id="comment1">
+                <div class="comment-author">晏孜</div>
+                <div class="comment-content">
+                    请各位尽快修改自己的账号信息，注意账号密码的复杂程度和安全性。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 89
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论2 -->
+            <div class="comment" id="comment2">
+                <div class="comment-author">乱七八糟</div>
+                <div class="comment-content">
+                    为什么会有人要来攻击这个垃圾系统啊？
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 74
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">我是杨戬的狗</div>
+                    <div class="reply-content">可能又是谁盯上了我们这群人吧，说不好是谁，但是这次的人比较厉害，钻了论坛的漏洞。</div>
+                </div>
+                
+                <!-- 回复2 -->
+                <div class="comment-reply">
+                    <div class="reply-author">晏孜</div>
+                    <div class="reply-content">据安全部所说，是为了能够从外部追踪到各位的信息为目的，不过现在已经成功拦截，我们的系统也在加强维护。</div>
+                </div>
+            </div>
+            
+            <!-- 评论3 -->
+            <div class="comment" id="comment3">
+                <div class="comment-author">心理委员</div>
+                <div class="comment-content">
+                    不是？初始密码也太简单了吧？
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 103
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">我只是一直爱着她</div>
+                    <div class="reply-content">心理委员我不得劲……</div>
+                </div>
+                
+                <!-- 回复2 -->
+                <div class="comment-reply">
+                    <div class="reply-author">心理委员</div>
+                    <div class="reply-content">滚。</div>
+                </div>
+            </div>
+            
+            <!-- 评论4 -->
+            <div class="comment" id="comment4">
+                <div class="comment-author">渡厄小僧</div>
+                <div class="comment-content">
+                    昨日禅定之时突感心神不宁，原是恶意符文作祟，多谢论坛及时处置，这就去修改密码。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 56
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">闲得黄鱼</div>
+                    <div class="reply-content">快哉快哉</div>
+                </div>
+            </div>
+            
+            <!-- 评论5 -->
+            <div class="comment" id="comment5">
+                <div class="comment-author">我的胆在哪里</div>
+                <div class="comment-content">
+                    我靠，那岂不是很危险。所以到底为什么这个论坛不能够注销啊……这真的不算限制我们的自由吗？
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 38
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">晏孜</div>
+                    <div class="reply-content">十分抱歉给您带来了困扰，但是由于需要进行统一的管理，我们不得不开发并使用"我是小神仙"论坛，本论坛的账号除拥有修道体制的人类不再修炼，放弃自身特质以外不予以注销。</div>
+                </div>
+            </div>
+            
+            <!-- 评论6 -->
+            <div class="comment" id="comment6">
+                <div class="comment-author">还下不下雪了</div>
+                <div class="comment-content">
+                    小燕子穿花衣~
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 27
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">晏孜</div>
+                    <div class="reply-content">……</div>
+                </div>
+                
+                <!-- 回复2 -->
+                <div class="comment-reply">
+                    <div class="reply-author">还下不下雪了</div>
+                    <div class="reply-content">晏孜，我没有你怎么办啊晏孜——</div>
+                </div>
+                
+                <!-- 回复3 - 特殊标记 -->
+                <div class="comment-reply" style="border-left: 3px solid #ff6b6b;">
+                    <div class="reply-author" style="color: #ff6b6b;">系统提示</div>
+                    <div class="reply-content" style="color: #ffcccb;">【用户"还下不下雪了"已被禁言30天】</div>
+                </div>
+            </div>
+            
+            <!-- 评论7 -->
+            <div class="comment" id="comment7">
+                <div class="comment-author">青灯夜游</div>
+                <div class="comment-content">
+                    喂信收到一堆乱码还以为是哪位道友的密语，闹了半天是入侵者搞的鬼，必须改个复杂密码防着点。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 45
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论8 -->
+            <div class="comment" id="comment8">
+                <div class="comment-author">人间凑数员</div>
+                <div class="comment-content">
+                    吓死我了，我还以为我的浏览记录要被扒出来了，这就去把密码改成爹妈都认不出的程度！！！
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 62
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论9 -->
+            <div class="comment" id="comment9">
+                <div class="comment-author">折枝</div>
+                <div class="comment-content">
+                    改密码 + 1，顺便问下论坛能不能整个登录提醒啊？异地登录好歹给发个通知。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 51
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">晏孜</div>
+                    <div class="reply-content">该功能已在规划中，会尽快上线，感谢建议。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        // 滚动效果
+        const comments = document.querySelectorAll('.comment');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        comments.forEach(comment => {
+            comment.style.opacity = '0';
+            comment.style.transform = 'translateY(20px)';
+            comment.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(comment);
+        });
+    </script>
+</body>
+</html>

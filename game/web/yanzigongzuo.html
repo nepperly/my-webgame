@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作人员-晏孜</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === 基础样式 === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* === 顶部论坛导航栏 === */
+        .forum-header {
+            background: rgba(16, 36, 64, 0.9);
+            border-radius: 20px;
+            padding: 25px 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #80deea;
+        }
+        
+        .forum-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #80deea, #00acc1, #80deea);
+        }
+        
+        .forum-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .forum-title h1 {
+            color: #80deea;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(128, 222, 234, 0.7);
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+        }
+        
+        .forum-subtitle {
+            font-size: 1.1rem;
+            color: #b2ebf2;
+        }
+        
+        /* 功能栏 */
+        .function-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        /* 用户操作区域 */
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        
+        .user-btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 2px solid #80deea;
+            background: rgba(16, 36, 64, 0.8);
+            color: #80deea;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .user-btn:hover {
+            background: rgba(128, 222, 234, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(128, 222, 234, 0.3);
+        }
+        
+        .login-btn {
+            border-color: #80deea;
+        }
+        
+        /* 搜索框 */
+        .search-box {
+            flex: 1;
+            display: flex;
+            border: 2px solid #80deea;
+            border-radius: 50px;
+            overflow: hidden;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 12px 25px;
+            border: none;
+            background: linear-gradient(90deg, #00acc1, #00838f);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+        
+        .search-box button:hover {
+            background: linear-gradient(90deg, #00838f, #006064);
+            box-shadow: 0 0 15px rgba(0, 172, 193, 0.5);
+        }
+        
+        /* === 工作台主内容区 === */
+        .workstation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* 员工信息卡片 - 缩小版 */
+        .employee-card {
+            background: rgba(22, 33, 62, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            min-height: auto;
+        }
+        
+        .employee-info {
+            flex: 1;
+        }
+        
+        .employee-name {
+            font-size: 1.5rem;
+            color: #80deea;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .employee-id {
+            font-size: 1rem;
+            color: #ffcc80;
+            background: rgba(255, 204, 128, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        .employee-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            background: rgba(16, 36, 64, 0.6);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            min-width: 150px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #b2ebf2;
+            margin-bottom: 4px;
+        }
+        
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #e0f7fa;
+        }
+        
+        .stat-highlight {
+            color: #ff8a65;
+            border-color: rgba(255, 138, 101, 0.3);
+        }
+        
+        .employee-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            border: 2px solid rgba(128, 222, 234, 0.5);
+            margin-left: 20px;
+        }
+        
+        /* 选项卡容器 */
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 0;
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px 15px 0 0;
+            padding: 15px 20px 0 20px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            border-bottom: none;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.3s;
+            background: rgba(22, 33, 62, 0.6);
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        
+        .tab:hover {
+            background: rgba(128, 222, 234, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tab.active {
+            background: rgba(22, 33, 62, 0.95);
+            color: #80deea;
+            border-bottom: 3px solid #80deea;
+            font-weight: bold;
+        }
+        
+        /* 内容区域 */
+        .content-area {
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 0 15px 15px 15px;
+            padding: 25px;
+            min-height: 200px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+            max-height: 600px;
+        }
+        
+        .content-pane {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-pane.active {
+            display: block;
+        }
+        
+        /* === 员工信息页面样式 - 缩小版 === */
+        .employee-details-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .info-section {
+            background: rgba(16, 36, 64, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .info-section.personal {
+            border-left-color: #3b82f6;
+        }
+        
+        .info-section.work {
+            border-left-color: #f59e0b;
+        }
+        
+        .info-section.permissions {
+            border-left-color: #8b5cf6;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #80deea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.1rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            background: rgba(51, 65, 85, 0.4);
+            border-radius: 8px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .info-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1rem;
+            color: #e2e8f0;
+            font-weight: bold;
+        }
+        
+        .permission-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .permission-tag {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            color: #dbeafe;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        
+        /* === 工作日志样式 === */
+        .log-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .log-section {
+            background: rgba(16, 36, 64, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid;
+        }
+        
+        .log-section.system {
+            border-left-color: #10b981;
+        }
+        
+        .log-section.security {
+            border-left-color: #f59e0b;
+        }
+        
+        .log-section.personnel {
+            border-left-color: #8b5cf6;
+        }
+        
+        .log-section.personal {
+            border-left-color: #ef4444;
+        }
+        
+        .log-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .log-title i {
+            font-size: 1.1rem;
+        }
+        
+        .log-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(148, 163, 184, 0.3);
+        }
+        
+        .log-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .log-meta {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .log-content {
+            line-height: 1.6;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+        
+        .log-content.highlight {
+            background: rgba(239, 68, 68, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #ef4444;
+            margin-top: 6px;
+            font-style: italic;
+        }
+        
+        .log-todo {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        
+        .todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(51, 65, 85, 0.4);
+            border-radius: 8px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .todo-item input[type="checkbox"] {
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .todo-item label {
+            flex: 1;
+            cursor: pointer;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+        
+        .todo-item input:checked + label {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        
+        /* === 内部通讯样式 === */
+        .chat-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(16, 36, 64, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .chat-tab {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .chat-tab:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .chat-tab.active {
+            background: rgba(30, 41, 59, 0.95);
+            color: #80deea;
+            border-color: #80deea;
+            font-weight: bold;
+        }
+        
+        .chat-container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .chat-header {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chat-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .chat-user-details h3 {
+            color: #80deea;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        
+        .chat-user-details p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .chat-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        /* 自定义滚动条 */
+        .chat-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .chat-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .chat-content::-webkit-scrollbar-thumb {
+            background: #60a5fa;
+            border-radius: 10px;
+        }
+        
+        /* 消息气泡 */
+        .message {
+            display: flex;
+            max-width: 85%;
+        }
+        
+        .message.xueren, .message.anquan, .message.wang {
+            align-self: flex-start;
+        }
+        
+        .message.yanz {
+            align-self: flex-end;
+        }
+        
+        .message-content {
+            margin: 0 8px;
+            display: flex;
+            flex-direction: column;
+            min-width: 180px;
+        }
+        
+        .message-sender {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .xueren .message-sender {
+            color: #60a5fa;
+        }
+        
+        .anquan .message-sender {
+            color: #10b981;
+        }
+        
+        .wang .message-sender {
+            color: #f59e0b;
+        }
+        
+        .yanz .message-sender {
+            color: #80deea;
+        }
+        
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            max-width: 100%;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+        
+        .xueren .message-bubble {
+            background: rgba(96, 165, 250, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            border-top-left-radius: 6px;
+            color: #dbeafe;
+        }
+        
+        .anquan .message-bubble {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-top-left-radius: 6px;
+            color: #d1fae5;
+        }
+        
+        .wang .message-bubble {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-top-left-radius: 6px;
+            color: #fef3c7;
+        }
+        
+        .yanz .message-bubble {
+            background: rgba(128, 222, 234, 0.2);
+            border: 1px solid rgba(128, 222, 234, 0.4);
+            border-top-right-radius: 6px;
+            color: #e0f7fa;
+        }
+        
+        .message-time {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+        
+        .yanz .message-time {
+            align-self: flex-end;
+        }
+        
+        .chat-input-area {
+            padding: 15px 20px;
+            background: rgba(30, 41, 59, 0.9);
+            border-top: 1px solid rgba(96, 165, 250, 0.2);
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 25px;
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            background: rgba(15, 23, 42, 0.7);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .chat-input:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 12px rgba(96, 165, 250, 0.3);
+        }
+        
+        .chat-send-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .chat-send-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* === 工作人员信息管理表格 === */
+        .personnel-table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        
+        .personnel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .personnel-table th {
+            background: rgba(16, 36, 64, 0.8);
+            color: #80deea;
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            font-weight: bold;
+        }
+        
+        .personnel-table td {
+            padding: 12px 15px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            color: #e2e8f0;
+        }
+        
+        .personnel-table tr:nth-child(even) {
+            background: rgba(16, 36, 64, 0.4);
+        }
+        
+        .personnel-table tr:hover {
+            background: rgba(128, 222, 234, 0.1);
+        }
+        
+        .personnel-table .highlight {
+            background: rgba(128, 222, 234, 0.1);
+            font-weight: bold;
+            border-left: 3px solid #80deea;
+        }
+        
+        /* === 底部信息 === */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 12px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+            margin-top: 15px;
+            color: #b2ebf2;
+            font-size: 0.9rem;
+        }
+        
+        /* === 退出确认弹窗 === */
+        .logout-confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logout-confirm-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ffcc80;
+            box-shadow: 0 0 50px rgba(255, 204, 128, 0.5);
+            position: relative;
+            text-align: center;
+        }
+        
+        .logout-confirm-content h2 {
+            color: #ffcc80;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .logout-confirm-content p {
+            color: #b2ebf2;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .logout-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .logout-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .logout-confirm-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            border-color: #ff6b6b;
+        }
+        
+        .logout-confirm-btn:hover {
+            background: linear-gradient(135deg, #ff5252, #ff3d3d);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.5);
+        }
+        
+        .logout-cancel-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #b2ebf2;
+            border-color: #b2ebf2;
+        }
+        
+        .logout-cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* === 动画 === */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* === 响应式设计 === */
+        @media (max-width: 1024px) {
+            .employee-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .employee-avatar {
+                margin-left: 0;
+            }
+            
+            .employee-stats {
+                justify-content: center;
+            }
+            
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .forum-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .function-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-box {
+                width: 100%;
+                min-width: auto;
+                max-width: none;
+            }
+            
+            .employee-name {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .employee-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .tabs-container {
+                flex-direction: column;
+                padding: 12px 12px 0 12px;
+            }
+            
+            .tab {
+                border-radius: 8px;
+                margin-bottom: 5px;
+            }
+            
+            .content-area {
+                border-radius: 0 0 12px 12px;
+                padding: 15px;
+                max-height: 600px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-selector {
+                flex-direction: column;
+            }
+            
+            .chat-tab {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .message {
+                max-width: 95%;
+            }
+            
+            .chat-input-area {
+                flex-direction: column;
+            }
+            
+            .chat-send-btn {
+                width: 100%;
+                border-radius: 25px;
+                height: 45px;
+            }
+            
+            .logout-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .personnel-table {
+                font-size: 0.8rem;
+            }
+            
+            .personnel-table th,
+            .personnel-table td {
+                padding: 8px 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .forum-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .user-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                border-radius: 50px;
+            }
+            
+            .search-box input {
+                border-radius: 50px;
+                margin-bottom: 0;
+            }
+            
+            .search-box button {
+                border-radius: 50px;
+                margin-top: 8px;
+            }
+            
+            .employee-name {
+                font-size: 1.4rem;
+            }
+            
+            .employee-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .content-pane {
+                padding: 12px;
+            }
+            
+            .log-title, .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .chat-content {
+                padding: 15px;
+            }
+            
+            .logout-confirm-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 退出确认弹窗 -->
+    <div class="logout-confirm-modal" id="logoutConfirmModal">
+        <div class="logout-confirm-content">
+            <h2><i class="fas fa-sign-out-alt"></i> 确认退出</h2>
+            <p>确定要退出当前账号吗？<br>退出后将返回登录页面</p>
+            <div class="logout-actions">
+                <button class="logout-btn logout-confirm-btn" onclick="confirmLogout()">
+                    <i class="fas fa-check"></i> 确定退出
+                </button>
+                <button class="logout-btn logout-cancel-btn" onclick="closeLogoutConfirm()">
+                    <i class="fas fa-times"></i> 取消
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 顶部论坛导航栏 -->
+        <div class="forum-header">
+            <div class="forum-title">
+                <h1>我是小神仙</h1>
+                <div class="forum-subtitle">修仙论坛 - 人事主管/内部纪律督察工作台</div>
+            </div>
+            
+            <!-- 功能栏 -->
+            <div class="function-bar">
+                <div class="user-actions">
+                    <!-- 登录按钮显示为晏孜 -->
+                    <button class="user-btn login-btn" onclick="showLogoutConfirm()">
+                        <i class="fas fa-user-tie"></i> 晏孜
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索内容...">
+                    <button onclick="handleSearch()">
+                        <i class="fas fa-search"></i> 搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工作台主内容区 -->
+        <div class="workstation-container">
+            <!-- 员工信息卡片 - 缩小版 -->
+            <div class="employee-card">
+                <div class="employee-info">
+                    <div class="employee-name">
+                        <span>晏孜</span>
+                        <span class="employee-id">工号: A001202301</span>
+                    </div>
+                    
+                    <div class="employee-stats">
+                        <div class="stat-item stat-highlight">
+                            <div class="stat-label">待处理事项</div>
+                            <div class="stat-value">28项</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">本周处理违规事件</div>
+                            <div class="stat-value">9起</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">人事档案审核</div>
+                            <div class="stat-value">7份</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">管理权限等级</div>
+                            <div class="stat-value">Lv.4</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="employee-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+            </div>
+            
+            <!-- 选项卡 -->
+            <div class="tabs-container">
+                <div class="tab active" data-tab="employee">
+                    <i class="fas fa-id-card"></i> 员工信息
+                </div>
+                <div class="tab" data-tab="log">
+                    <i class="fas fa-clipboard-list"></i> 工作日志
+                </div>
+                <div class="tab" data-tab="chat">
+                    <i class="fas fa-comments"></i> 内部通讯
+                </div>
+                <div class="tab" data-tab="personnel">
+                    <i class="fas fa-users"></i> 人员管理
+                </div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 员工信息页面 - 缩小版 -->
+                <div class="content-pane active" id="employee-pane">
+                    <div class="employee-details-container">
+                        <!-- 个人信息 -->
+                        <div class="info-section personal">
+                            <h3 class="section-title"><i class="fas fa-user-circle"></i> 个人信息</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">姓名</div>
+                                    <div class="info-value">晏孜</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">工号</div>
+                                    <div class="info-value">A001202301</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">部门</div>
+                                    <div class="info-value">人事管理部</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">职位</div>
+                                    <div class="info-value">人事主管 / 内部纪律督察</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">管理权限等级</div>
+                                    <div class="info-value">Lv.4</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 待处理事项 -->
+                        <div class="info-section work">
+                            <h3 class="section-title"><i class="fas fa-tasks"></i> 待处理事项</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">人事档案审核</div>
+                                    <div class="info-value">7份</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">绩效面谈安排</div>
+                                    <div class="info-value">5人</div>
+                                </div>
+                                <div class="info-item stat-highlight">
+                                    <div class="info-label">纪律处分流程跟进</div>
+                                    <div class="info-value">3件</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">跨部门协调查询</div>
+                                    <div class="info-value">13条</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 权限信息 -->
+                        <div class="info-section permissions">
+                            <h3 class="section-title"><i class="fas fa-shield-alt"></i> 管理权限</h3>
+                            <div class="permission-list">
+                                <div class="permission-tag">人员管理</div>
+                                <div class="permission-tag">纪律审查</div>
+                                <div class="permission-tag">跨部门协作授权</div>
+                                <div class="permission-tag">绩效评估审批</div>
+                                <div class="permission-tag">人事档案访问</div>
+                                <div class="permission-tag">督察权限分配</div>
+                                <div class="permission-tag">内部审计查询</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 工作日志页面 -->
+                <div class="content-pane" id="log-pane">
+                    <div class="log-container">
+                        <!-- 实时留言 -->
+                        <div class="log-section system">
+                            <h3 class="log-title"><i class="fas fa-bell"></i> 实时留言</h3>
+                            
+                            <div class="log-item">
+                                <div class="log-meta">
+                                    <span><i class="fas fa-building"></i> 行政部</span>
+                                    <span>今天 14:30</span>
+                                </div>
+                                <div class="log-content">
+                                    下周一上午9:00-11:00的第三会议室已为您预留，用途标注为"督察组专项培训"。
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 处理内容 -->
+                        <div class="log-section security">
+                            <h3 class="log-title"><i class="fas fa-tasks"></i> 处理内容</h3>
+                            
+                            <div class="log-item">
+                                <div class="log-content">
+                                    <strong>1、人事事务：</strong>
+                                    <ul style="margin-left: 20px; margin-top: 8px; list-style-type: disc; line-height: 1.6;">
+                                        <li>完成新一批督察员（共5人）的岗位职责签字确认与权限分配。</li>
+                                        <li>批复内容审核部提交的季度绩效初评结果，约谈评分末位员工1名。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="log-item">
+                                <div class="log-content">
+                                    <strong>2、纪律督察：</strong>
+                                    <ul style="margin-left: 20px; margin-top: 8px; list-style-type: disc; line-height: 1.6;">
+                                        <li>审阅薛仁提交的《本周督察审核问题汇总》，标注3处需与安泉当面核实的参数标准。</li>
+                                        <li>调取安全技术部近三个月的外部协查记录，未发现越权或泄密事件。</li>
+                                        <li>对自身权限范围内的操作日志进行自查（结果：无异常）。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="log-item">
+                                <div class="log-content">
+                                    <strong>3、跨部门协调：</strong>
+                                    <ul style="margin-left: 20px; margin-top: 8px; list-style-type: disc; line-height: 1.6;">
+                                        <li>向行政部提交下周会议安排，并同步至薛仁及督察组日程。</li>
+                                        <li>与安泉确认下周一下午进行督察组安全规范培训。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 备注/待办 -->
+                        <div class="log-section personal">
+                            <h3 class="log-title"><i class="fas fa-sticky-note"></i> 备注/待办</h3>
+                            
+                            <div class="log-todo">
+                                <div class="todo-item">
+                                    <input type="checkbox" id="todo1">
+                                    <label for="todo1">需跟进薛仁与安泉的培训对接进展，确保参数模板准确落地。</label>
+                                </div>
+                                
+                                <div class="todo-item">
+                                    <input type="checkbox" id="todo2">
+                                    <label for="todo2">明日需复核内容审核部近期所有"涉及高管讨论"帖子的处理轨迹。</label>
+                                </div>
+                                
+                                <div class="todo-item">
+                                    <input type="checkbox" id="todo3">
+                                    <label for="todo3">下周绩效面谈材料准备。</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 内部通讯页面 -->
+                <div class="content-pane" id="chat-pane">
+                    <!-- 聊天对象选择器 -->
+                    <div class="chat-selector">
+                        <div class="chat-tab active" data-chat="xueren">
+                            薛仁
+                        </div>
+                        <div class="chat-tab" data-chat="anquan">
+                            安泉
+                        </div>
+                        <div class="chat-tab" data-chat="wang">
+                            小王
+                        </div>
+                    </div>
+                    
+                    <!-- 薛仁聊天界面 -->
+                    <div class="chat-container" id="xueren-chat">
+                        <div class="chat-header">
+                            <div class="chat-user-info">
+                                <div class="chat-user-avatar" style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">薛</div>
+                                <div class="chat-user-details">
+                                    <h3>薛仁</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-content" id="xuerenChatContent">
+                            <!-- 日期：2024.1.5 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2024年1月5日
+                                </span>
+                            </div>
+                            
+                            <div class="message xueren">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-shield"></i> 薛仁
+                                    </div>
+                                    <div class="message-bubble">
+                                        晏主管，刚完成本周督察审核工作，发现部分设备巡检记录里的安全防护参数标注不达标，缺少明确的合规依据，后续督察工作很难统一标准。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        新一批督察员刚上岗，对安全技术规范不熟悉是一方面，更关键的是咱们得拿到权威的参数参考模板。安全技术部的安泉，之前参与过公司督察体系的搭建，对这类标准的把控很到位，你直接联系他，让他提供一份合规参数清单，另外协调时间给督察组做一次专项培训。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message xueren">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-shield"></i> 薛仁
+                                    </div>
+                                    <div class="message-bubble">
+                                        好的好的，我这就整理审核中发现的具体问题，列成清单发给他，确保培训更有针对性。另外，培训的会议室需要提前申请，您看是我来协调还是走行政流程？
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        会议室我让行政部预留，你不用管。重点是把问题摸透，和安泉对接时，务必明确模板的交付时间和培训节点，督察工作不能因为标准模糊耽误进度。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message xueren">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-shield"></i> 薛仁
+                                    </div>
+                                    <div class="message-bubble">
+                                        好的晏主管，明天一早给您汇报进展。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        嗯，抓紧落实，有解决不了的问题随时找我。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        还有我的留言你看到了吗。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message xueren">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-shield"></i> 薛仁
+                                    </div>
+                                    <div class="message-bubble">
+                                        看到了。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        好。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" id="xueren-chat-input" placeholder="输入消息给薛仁...">
+                            <button class="chat-send-btn" onclick="sendMessage('xueren')">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 安泉聊天界面 -->
+                    <div class="chat-container" id="anquan-chat" style="display: none;">
+                        <div class="chat-header">
+                            <div class="chat-user-info">
+                                <div class="chat-user-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">安</div>
+                                <div class="chat-user-details">
+                                    <h3>安泉</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-content" id="anquanChatContent">
+                            <!-- 日期：2024.1.5 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2024年1月5日
+                                </span>
+                            </div>
+                            
+                            <div class="message anquan">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-shield-alt"></i> 安泉
+                                    </div>
+                                    <div class="message-bubble">
+                                        参数模板已发你加密邮箱。另外，你最近的审计查询频次，在系统里有点显眼。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        例行自查，兼管某些人。你知道分寸。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message anquan">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-shield-alt"></i> 安泉
+                                    </div>
+                                    <div class="message-bubble">
+                                        明白。周一培训的演示案例，我会用虚拟数据，不会涉及真实业务日志。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        好。薛仁那边的问题清单，今天会发你。培训时侧重实操判断标准。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message anquan">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-shield-alt"></i> 安泉
+                                    </div>
+                                    <div class="message-bubble">
+                                        收到。还有，关于"年终福利"那条隐藏帖的访问记录，我查了，没有异常。但建议以后这类贴直接归档，而非隐藏。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        理由？
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message anquan">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-shield-alt"></i> 安泉
+                                    </div>
+                                    <div class="message-bubble">
+                                        隐藏状态反而会激发某些人的查询欲望，留下审计痕迹。归档则更彻底。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        知道了。按你说的办。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" id="anquan-chat-input" placeholder="输入消息给安泉...">
+                            <button class="chat-send-btn" onclick="sendMessage('anquan')">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 小王聊天界面 -->
+                    <div class="chat-container" id="wang-chat" style="display: none;">
+                        <div class="chat-header">
+                            <div class="chat-user-info">
+                                <div class="chat-user-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">王</div>
+                                <div class="chat-user-details">
+                                    <h3>小王</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-content" id="wangChatContent">
+                            <!-- 日期：2024.1.4 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2024年1月4日
+                                </span>
+                            </div>
+                            
+                            <div class="message wang">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user"></i> 小王
+                                    </div>
+                                    <div class="message-bubble">
+                                        晏主管，四季度的成妖人员统计初步出来了，新登记89人，比上季度多15%。植物类觉醒比例首次超过兽类。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        嗯，论坛"新手村"板块活跃度怎么样？
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wang">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user"></i> 小王
+                                    </div>
+                                    <div class="message-bubble">
+                                        对应上升约20%，但小摩擦也有增加，主要是资源分配和身份融入的问题。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message yanz">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 晏孜
+                                    </div>
+                                    <div class="message-bubble">
+                                        把摩擦案例摘要给我。另外，提醒培训部下周优化植物类的适应课程。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wang">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user"></i> 小王
+                                    </div>
+                                    <div class="message-bubble">
+                                        好的，马上处理。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" id="wang-chat-input" placeholder="输入消息给小王...">
+                            <button class="chat-send-btn" onclick="sendMessage('wang')">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 人员管理页面 -->
+                <div class="content-pane" id="personnel-pane">
+                    <h3 class="section-title"><i class="fas fa-users"></i> 工作人员信息管理</h3>
+                    <div class="personnel-table-container">
+                        <table class="personnel-table">
+                            <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>用户名</th>
+                                    <th>工号</th>
+                                    <th>部门</th>
+                                    <th>岗位</th>
+                                    <th>密码提示（仅管理员可见）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="highlight">
+                                    <td>晏孜</td>
+                                    <td>yanzi</td>
+                                    <td>A001202301</td>
+                                    <td>人事管理部</td>
+                                    <td>主管 / 督察</td>
+                                    <td>名字</td>
+                                </tr>
+                                <tr>
+                                    <td>薛仁</td>
+                                    <td>xueren</td>
+                                    <td>B123456789</td>
+                                    <td>内容审核与督察组</td>
+                                    <td>审核员 / 见习督察</td>
+                                    <td>尚未修改</td>
+                                </tr>
+                                <tr>
+                                    <td>王瑾</td>
+                                    <td>wangjin</td>
+                                    <td>B123456790</td>
+                                    <td>人事管理部</td>
+                                    <td>人事专员</td>
+                                    <td>"姓名首字母+入职年月（6位）"</td>
+                                </tr>
+                                <tr>
+                                    <td>安泉</td>
+                                    <td>anquan</td>
+                                    <td>C001202301</td>
+                                    <td>安全技术部</td>
+                                    <td>负责人</td>
+                                    <td>2栏3凯，viwiuwdhblv</td>
+                                </tr>
+                                <tr>
+                                    <td>李振</td>
+                                    <td>lizhen</td>
+                                    <td>B123456791</td>
+                                    <td>内容审核部</td>
+                                    <td>审核组长</td>
+                                    <td>"LiZhen@部门代码+季度"</td>
+                                </tr>
+                                <tr>
+                                    <td>赵小雨</td>
+                                    <td>zhaoxiaoyu</td>
+                                    <td>B123456792</td>
+                                    <td>内容审核部</td>
+                                    <td>审核员</td>
+                                    <td>生日倒序+特殊字符"#"</td>
+                                </tr>
+                                <tr>
+                                    <td>孙浩然</td>
+                                    <td>sunhaoran</td>
+                                    <td>B123456793</td>
+                                    <td>内容审核与督察组</td>
+                                    <td>见习督察</td>
+                                    <td>密码管理器生成，无提示</td>
+                                </tr>
+                                <tr>
+                                    <td>吴芳</td>
+                                    <td>wufang</td>
+                                    <td>B123456794</td>
+                                    <td>人事管理部</td>
+                                    <td>档案管理员</td>
+                                    <td>"WF+工号后四位"</td>
+                                </tr>
+                                <tr>
+                                    <td>郑涛</td>
+                                    <td>zhengtao</td>
+                                    <td>C001202303</td>
+                                    <td>安全技术部</td>
+                                    <td>安全分析师</td>
+                                    <td>郑涛_ZT@安全日（月日）</td>
+                                </tr>
+                                <tr>
+                                    <td>林静</td>
+                                    <td>linjing</td>
+                                    <td>B123456795</td>
+                                    <td>内容审核部</td>
+                                    <td>审核员</td>
+                                    <td>林静_Lj+随机6位数字（每月更新）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(16, 36, 64, 0.6); border-radius: 8px; border-left: 4px solid #80deea;">
+                        <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">
+                            <i class="fas fa-info-circle" style="color: #80deea;"></i> 
+                            注：密码提示仅用于内部管理目的，不存储实际密码。管理员可查看提示以协助员工密码重置。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 登录状态变量
+        let isLoggedIn = true;
+        let currentUser = '晏孜';
+        let currentChat = 'xueren';
+        
+        // 主选项卡切换
+        document.addEventListener('DOMContentLoaded', function() {
+            // 主选项卡切换
+            const tabs = document.querySelectorAll('.tab');
+            const panes = document.querySelectorAll('.content-pane');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 更新选项卡状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新内容面板
+                    panes.forEach(pane => {
+                        pane.classList.remove('active');
+                        if (pane.id === `${tabId}-pane`) {
+                            pane.classList.add('active');
+                        }
+                    });
+                    
+                    // 如果是聊天页面，确保当前聊天界面正确显示
+                    if (tabId === 'chat') {
+                        showChat(currentChat);
+                    }
+                });
+            });
+            
+            // 聊天对象切换
+            const chatTabs = document.querySelectorAll('.chat-tab');
+            chatTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const chatId = this.getAttribute('data-chat');
+                    
+                    // 更新聊天选项卡状态
+                    chatTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 切换聊天界面
+                    showChat(chatId);
+                    currentChat = chatId;
+                });
+            });
+            
+            // 聊天输入框回车发送
+            document.getElementById('xueren-chat-input')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage('xueren');
+                }
+            });
+            
+            document.getElementById('anquan-chat-input')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage('anquan');
+                }
+            });
+            
+            document.getElementById('wang-chat-input')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage('wang');
+                }
+            });
+            
+            // 待办事项复选框功能
+            document.querySelectorAll('.todo-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const label = this.nextElementSibling;
+                    if (this.checked) {
+                        label.style.textDecoration = 'line-through';
+                        label.style.opacity = '0.6';
+                    } else {
+                        label.style.textDecoration = 'none';
+                        label.style.opacity = '1';
+                    }
+                });
+            });
+            
+            // 初始化：聊天页面滚动到底部
+            scrollChatToBottom('xueren');
+            scrollChatToBottom('anquan');
+            scrollChatToBottom('wang');
+        });
+        
+        // 显示聊天界面
+        function showChat(chatId) {
+            // 隐藏所有聊天界面
+            document.getElementById('xueren-chat').style.display = 'none';
+            document.getElementById('anquan-chat').style.display = 'none';
+            document.getElementById('wang-chat').style.display = 'none';
+            
+            // 显示当前聊天界面
+            document.getElementById(`${chatId}-chat`).style.display = 'flex';
+            
+            // 滚动到底部
+            setTimeout(() => {
+                scrollChatToBottom(chatId);
+            }, 50);
+        }
+        
+        // 滚动聊天到底部
+        function scrollChatToBottom(chatId) {
+            const chatContent = document.getElementById(`${chatId}ChatContent`);
+            if (chatContent) {
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }
+        }
+        
+        // 聊天功能
+        function sendMessage(chatId) {
+            const chatInput = document.getElementById(`${chatId}-chat-input`);
+            const message = chatInput.value.trim();
+            
+            if (message) {
+                // 创建新消息元素
+                const chatContent = document.getElementById(`${chatId}ChatContent`);
+                const now = new Date();
+                const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message yanz';
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-sender">
+                            <i class="fas fa-user-tie"></i> 晏孜
+                        </div>
+                        <div class="message-bubble">${message}</div>
+                        <div class="message-time">${timeStr}</div>
+                    </div>
+                `;
+                
+                chatContent.appendChild(messageDiv);
+                chatInput.value = '';
+                
+                // 滚动到底部
+                scrollChatToBottom(chatId);
+            }
+        }
+        
+        // ========== 功能函数 ==========
+        
+        // 显示退出确认弹窗
+        function showLogoutConfirm() {
+            document.getElementById('logoutConfirmModal').style.display = 'flex';
+        }
+        
+        function closeLogoutConfirm() {
+            document.getElementById('logoutConfirmModal').style.display = 'none';
+        }
+        
+        // 确认退出
+        function confirmLogout() {
+            // 清空登录状态标记
+            localStorage.removeItem('yanz_welcome_shown');
+            
+            // 显示退出消息
+            showLogoutMessage();
+            
+            // 1秒后跳转到forum.html - 修改为在新窗口打开
+            setTimeout(() => {
+                window.open('forum.html', '_blank');
+            }, 1000);
+        }
+        
+        // 显示退出消息
+        function showLogoutMessage() {
+            // 创建退出消息框
+            const logoutBox = document.createElement('div');
+            logoutBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: #80deea;
+                padding: 15px 25px;
+                border-radius: 10px;
+                border: 2px solid #ffcc80;
+                box-shadow: 0 0 30px rgba(255, 204, 128, 0.5);
+                z-index: 1000;
+                max-width: 400px;
+                animation: slideIn 0.5s ease-out;
+            `;
+            
+            logoutBox.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-sign-out-alt" style="font-size: 24px; color: #ffcc80; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; margin-bottom: 5px;">退出成功！</div>
+                    <div style="font-size: 0.9em; color: #ffcc80;">正在退出 晏孜 账号...</div>
+                    <div style="margin-top: 10px; font-size: 0.8em; color: #b2ebf2;">
+                        <i class="fas fa-spinner fa-spin"></i> 即将在新窗口打开登录页面...
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(logoutBox);
+            
+            // 1秒后移除消息框
+            setTimeout(() => {
+                logoutBox.style.animation = 'slideOut 0.5s ease-out';
+                setTimeout(() => logoutBox.remove(), 500);
+            }, 1000);
+            
+            // 添加CSS动画（如果尚未添加）
+            if (!document.querySelector('#animation-styles')) {
+                const style = document.createElement('style');
+                style.id = 'animation-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // 关闭弹窗
+            closeLogoutConfirm();
+        }
+        
+        // 搜索功能 - 智能跳转 - 修改为在新窗口打开
+        const searchMap = {
+            '临新区': 'linxinqu.html',
+            '晏孜': 'yanzi.html', 
+            '安泉': 'anquan.html',
+            '薛仁': 'xueren.html',
+            '杠精': 'gangjing.html',
+            '我就叫杠精怎么了': 'gangjing.html',
+            '解珀': 'jiepo.html',
+            '新手村': 'xinshoucun.html',
+        };
+        
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.trim();
+            
+            if (!searchTerm) {
+                alert('请输入搜索内容！');
+                searchInput.focus();
+                return;
+            }
+            
+            let targetPage = null;
+            
+            // 1. 精确匹配
+            if (searchMap[searchTerm]) {
+                targetPage = searchMap[searchTerm];
+            } 
+            // 2. 模糊匹配（包含搜索词）
+            else {
+                for (const [keyword, page] of Object.entries(searchMap)) {
+                    if (searchTerm.toLowerCase().includes(keyword.toLowerCase())) {
+                        targetPage = page;
+                        break;
+                    }
+                }
+            }
+            
+            // 3. 默认跳转页面
+            if (!targetPage) {
+                targetPage = 'cuowu.html';
+            }
+            
+            // 修改为在新窗口打开
+            window.open(targetPage, '_blank');
+        }
+        
+        // 按回车键搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        
+        // 显示欢迎消息
+        function showWelcomeMessage() {
+            const welcomeBox = document.createElement('div');
+            welcomeBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: #80deea;
+                padding: 15px 25px;
+                border-radius: 10px;
+                border: 2px solid #80deea;
+                box-shadow: 0 0 10px rgba(128, 222, 234, 0.5);
+                z-index: 1000;
+                max-width: 400px;
+                animation: fadeIn 0.5s ease-out;
+            `;
+            
+            welcomeBox.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-user-tie" style="font-size: 24px; color: #80deea; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; margin-bottom: 5px;">欢迎回来，晏主管！</div>
+                </div>
+            `;
+            
+            document.body.appendChild(welcomeBox);
+            
+            // 3秒后移除消息框
+            setTimeout(() => {
+                welcomeBox.style.animation = 'fadeOut 0.5s ease-out';
+                setTimeout(() => welcomeBox.remove(), 500);
+            }, 3000);
+            
+            // 添加淡入淡出动画
+            if (!document.querySelector('#fade-animation-styles')) {
+                const style = document.createElement('style');
+                style.id = 'fade-animation-styles';
+                style.textContent = `
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    }
+                    @keyframes fadeOut {
+                        from { opacity: 1; transform: translateX(-50%) translateY(0); }
+                        to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // 设置标记，表示已显示过欢迎消息
+            localStorage.setItem('yanz_welcome_shown', 'true');
+        }
+        
+        // 页面加载时的初始化
+        window.onload = function() {
+            // 检查是否已经显示过欢迎消息
+            const welcomeShown = localStorage.getItem('yanz_welcome_shown');
+            
+            // 如果是从登录页面跳转过来（URL中有参数）或者第一次访问，显示欢迎消息
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromLogin = urlParams.get('from') === 'login';
+            
+            if (fromLogin || !welcomeShown) {
+                // 延迟显示欢迎消息，让页面先加载
+                setTimeout(() => {
+                    showWelcomeMessage();
+                }, 500);
+                
+                // 如果是通过参数进来的，清除URL参数
+                if (fromLogin) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        };
+        
+        // 点击弹窗外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('logoutConfirmModal');
+            
+            if (event.target === modal) {
+                closeLogoutConfirm();
+            }
+        }
+    </script>
+</body>
+</html>
