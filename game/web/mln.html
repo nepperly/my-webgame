@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作人员-莫拉娜</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* === 基础样式 === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* === 顶部论坛导航栏 === */
+        .forum-header {
+            background: rgba(16, 36, 64, 0.9);
+            border-radius: 20px;
+            padding: 25px 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #80deea;
+        }
+        
+        .forum-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #80deea, #00acc1, #80deea);
+        }
+        
+        .forum-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .forum-title h1 {
+            color: #80deea;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(128, 222, 234, 0.7);
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+        }
+        
+        .forum-subtitle {
+            font-size: 1.1rem;
+            color: #b2ebf2;
+        }
+        
+        /* 功能栏 */
+        .function-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        /* 用户操作区域 */
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        
+        .user-btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 2px solid #80deea;
+            background: rgba(16, 36, 64, 0.8);
+            color: #80deea;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .user-btn:hover {
+            background: rgba(128, 222, 234, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(128, 222, 234, 0.3);
+        }
+        
+        /* 搜索框 */
+        .search-box {
+            flex: 1;
+            display: flex;
+            border: 2px solid #80deea;
+            border-radius: 50px;
+            overflow: hidden;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+        }
+        
+        .search-box button {
+            padding: 12px 25px;
+            border: none;
+            background: linear-gradient(90deg, #00acc1, #00838f);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+        
+        .search-box button:hover {
+            background: linear-gradient(90deg, #00838f, #006064);
+            box-shadow: 0 0 15px rgba(0, 172, 193, 0.5);
+        }
+        
+        /* === 讣告区域 === */
+        .obituary-container {
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+        
+        .obituary-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .obituary-header h2 {
+            color: #80deea;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .obituary-subtitle {
+            color: #b2ebf2;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            text-align: left; /* 新增：靠左对齐 */
+        }
+        
+        .obituary-content {
+            line-height: 1.8;
+            color: #e0f7fa;
+            font-size: 1.05rem;
+        }
+        
+        .obituary-content p {
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+        
+        .obituary-content .highlight {
+            color: #ffcc80;
+            font-weight: bold;
+        }
+        
+        .obituary-signature {
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(128, 222, 234, 0.2);
+            color: #b2ebf2;
+            font-style: italic;
+        }
+        
+        /* === 工作台主内容区 === */
+        .workstation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* 员工信息卡片 */
+        .employee-card {
+            background: rgba(22, 33, 62, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            min-height: auto;
+        }
+        
+        .employee-info {
+            flex: 1;
+        }
+        
+        .employee-name {
+            font-size: 1.5rem;
+            color: #80deea;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .employee-id {
+            font-size: 1rem;
+            color: #ffcc80;
+            background: rgba(255, 204, 128, 0.1);
+            padding: 4px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        .employee-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            background: rgba(16, 36, 64, 0.6);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            min-width: 150px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #b2ebf2;
+            margin-bottom: 4px;
+        }
+        
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #e0f7fa;
+        }
+        
+        .stat-highlight {
+            color: #ff8a65;
+            border-color: rgba(255, 138, 101, 0.3);
+        }
+        
+        .employee-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            border: 2px solid rgba(128, 222, 234, 0.5);
+            margin-left: 20px;
+        }
+        
+        /* 选项卡容器 */
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 0;
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px 15px 0 0;
+            padding: 15px 20px 0 20px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            border-bottom: none;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.3s;
+            background: rgba(22, 33, 62, 0.6);
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: #e0f7fa;
+        }
+        
+        .tab:hover {
+            background: rgba(128, 222, 234, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tab.active {
+            background: rgba(22, 33, 62, 0.95);
+            color: #80deea;
+            border-bottom: 3px solid #80deea;
+            font-weight: bold;
+        }
+        
+        /* 内容区域 */
+        .content-area {
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 0 15px 15px 15px;
+            padding: 25px;
+            min-height: 200px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+            max-height: 600px;
+        }
+        
+        .content-pane {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-pane.active {
+            display: block;
+        }
+        
+        /* === 工作日志样式 === */
+        .log-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .log-section {
+            background: rgba(16, 36, 64, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid;
+        }
+        
+        .log-section.realtime {
+            border-left-color: #80deea;
+        }
+        
+        .log-section.work {
+            border-left-color: #ffcc80;
+        }
+        
+        .log-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #80deea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .log-title i {
+            font-size: 1.1rem;
+        }
+        
+        .log-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(148, 163, 184, 0.3);
+        }
+        
+        .log-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .log-content {
+            line-height: 1.6;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+        
+        .log-content .highlight {
+            color: #ffcc80;
+            font-weight: bold;
+        }
+        
+        .work-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .work-table th {
+            background: rgba(59, 130, 246, 0.2);
+            color: #dbeafe;
+            padding: 10px 8px;
+            text-align: left;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        
+        .work-table td {
+            padding: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #e2e8f0;
+        }
+        
+        .work-table tr:nth-child(even) {
+            background: rgba(30, 41, 59, 0.4);
+        }
+        
+        .work-table tr:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        /* === 内部通讯样式 === */
+        .chat-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(16, 36, 64, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .chat-tab {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .chat-tab:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .chat-tab.active {
+            background: rgba(30, 41, 59, 0.95);
+            color: #80deea;
+            border-color: #80deea;
+            font-weight: bold;
+        }
+        
+        .chat-container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .chat-header {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chat-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .chat-user-details h3 {
+            color: #80deea;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        
+        .chat-user-details p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .chat-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        /* 自定义滚动条 */
+        .chat-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .chat-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .chat-content::-webkit-scrollbar-thumb {
+            background: #60a5fa;
+            border-radius: 10px;
+        }
+        
+        /* 消息气泡 */
+        .message {
+            display: flex;
+            max-width: 85%;
+        }
+        
+        .message.wheat {
+            align-self: flex-start;
+        }
+        
+        .message.mola {
+            align-self: flex-end;
+        }
+        
+        .message-content {
+            margin: 0 8px;
+            display: flex;
+            flex-direction: column;
+            min-width: 180px;
+        }
+        
+        .message-sender {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .wheat .message-sender {
+            color: #ffcc80;
+        }
+        
+        .mola .message-sender {
+            color: #80deea;
+        }
+        
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            max-width: 100%;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+        
+        .wheat .message-bubble {
+            background: rgba(255, 204, 128, 0.2);
+            border: 1px solid rgba(255, 204, 128, 0.4);
+            border-top-left-radius: 6px;
+            color: #ffedcc;
+        }
+        
+        .mola .message-bubble {
+            background: rgba(128, 222, 234, 0.2);
+            border: 1px solid rgba(128, 222, 234, 0.4);
+            border-top-right-radius: 6px;
+            color: #dbeafe;
+        }
+        
+        .message-time {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+        
+        .mola .message-time {
+            align-self: flex-end;
+        }
+        
+        .chat-date {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .chat-date span {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .chat-input-area {
+            padding: 15px 20px;
+            background: rgba(30, 41, 59, 0.9);
+            border-top: 1px solid rgba(96, 165, 250, 0.2);
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 25px;
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            background: rgba(15, 23, 42, 0.7);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .chat-input:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 12px rgba(96, 165, 250, 0.3);
+        }
+        
+        .chat-send-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .chat-send-btn:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* === 退出确认弹窗 === */
+        .logout-confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logout-confirm-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ffcc80;
+            box-shadow: 0 0 50px rgba(255, 204, 128, 0.5);
+            position: relative;
+            text-align: center;
+        }
+        
+        .logout-confirm-content h2 {
+            color: #ffcc80;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .logout-confirm-content p {
+            color: #b2ebf2;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .logout-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .logout-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .logout-confirm-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            color: white;
+            border-color: #ff6b6b;
+        }
+        
+        .logout-confirm-btn:hover {
+            background: linear-gradient(135deg, #ff5252, #ff3d3d);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.5);
+        }
+        
+        .logout-cancel-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #b2ebf2;
+            border-color: #b2ebf2;
+        }
+        
+        .logout-cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        
+        /* === 动画 === */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* === 响应式设计 === */
+        @media (max-width: 1024px) {
+            .employee-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .employee-avatar {
+                margin-left: 0;
+            }
+            
+            .employee-stats {
+                justify-content: center;
+            }
+            
+            .work-table {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .forum-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .obituary-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .function-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .user-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-box {
+                width: 100%;
+                min-width: auto;
+                max-width: none;
+            }
+            
+            .employee-name {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .employee-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .tabs-container {
+                flex-direction: column;
+                padding: 12px 12px 0 12px;
+            }
+            
+            .tab {
+                border-radius: 8px;
+                margin-bottom: 5px;
+            }
+            
+            .content-area {
+                border-radius: 0 0 12px 12px;
+                padding: 15px;
+                max-height: 500px;
+            }
+            
+            .work-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .chat-selector {
+                flex-direction: column;
+            }
+            
+            .chat-tab {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .message {
+                max-width: 95%;
+            }
+            
+            .chat-input-area {
+                flex-direction: column;
+            }
+            
+            .chat-send-btn {
+                width: 100%;
+                border-radius: 25px;
+                height: 45px;
+            }
+            
+            .logout-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .forum-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .obituary-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .user-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                border-radius: 50px;
+            }
+            
+            .search-box input {
+                border-radius: 50px;
+                margin-bottom: 0;
+            }
+            
+            .search-box button {
+                border-radius: 50px;
+                margin-top: 8px;
+            }
+            
+            .employee-name {
+                font-size: 1.4rem;
+            }
+            
+            .employee-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .content-pane {
+                padding: 12px;
+            }
+            
+            .log-title {
+                font-size: 1.1rem;
+            }
+            
+            .chat-content {
+                padding: 15px;
+            }
+            
+            .logout-confirm-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 退出确认弹窗 -->
+    <div class="logout-confirm-modal" id="logoutConfirmModal">
+        <div class="logout-confirm-content">
+            <h2><i class="fas fa-sign-out-alt"></i> 确认退出</h2>
+            <p>确定要退出当前账号吗？<br>退出后将返回登录页面</p>
+            <div class="logout-actions">
+                <button class="logout-btn logout-confirm-btn" onclick="confirmLogout()">
+                    <i class="fas fa-check"></i> 确定退出
+                </button>
+                <button class="logout-btn logout-cancel-btn" onclick="closeLogoutConfirm()">
+                    <i class="fas fa-times"></i> 取消
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 顶部论坛导航栏 -->
+        <div class="forum-header">
+            <div class="forum-title">
+                <h1>我是小神仙</h1>
+                <div class="forum-subtitle">修仙论坛 - 用户关怀工作台</div>
+            </div>
+            
+            <!-- 功能栏 -->
+            <div class="function-bar">
+                <div class="user-actions">
+                    <!-- 登录按钮显示为mola -->
+                    <button class="user-btn login-btn" onclick="showLogoutConfirm()">
+                        <i class="fas fa-user"></i> 莫拉娜
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索内容...">
+                    <button onclick="handleSearch()">
+                        <i class="fas fa-search"></i> 搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 讣告区域 -->
+        <div class="obituary-container">
+            <div class="obituary-header">
+                <h2> 讣告</h2>
+                <div class="obituary-subtitle">公司全体员工：</div>
+            </div>
+            
+            <div class="obituary-content">
+                <p>我们以最沉痛的心情正式通告，用户运营部投诉与调解组员工莫拉娜（工号：B720202020），于 2024年1月16日下午在执行用户现场情绪安抚任务时，遭遇用户极端情绪失控导致的突发暴力事件，经紧急送医抢救无效，不幸因公殉职，年仅20岁。</p>
+                
+                <p>莫拉娜同志自入职以来，始终以高度的职业使命感与非凡的情感共情能力，投身于用户情绪支持与危机干预工作。在短短任职期间，她累计处理高危情绪案例47起，成功化解潜在危机31次，用户满意度达98.2%。她总说："情绪有的时候是没有对错的。"这份信念让她在岗位上成为了无数用户黑暗中微弱却坚定的光。</p>
+                
+                <p>此次事件发生在执行公司"高危用户线下关怀预案"过程中，具体情况已由安全部与相关部门介入调查。我们坚决谴责一切形式的暴力，并将全力配合后续处理，维护员工尊严与合法权益。</p>
+                
+                <p>谨此讣告，以寄哀思。愿逝者安息，生者珍重。</p>
+            </div>
+            
+            <div class="obituary-signature">
+                人事管理部 谨启<br>
+                2024年1月17日
+            </div>
+        </div>
+        
+        <!-- 工作台主内容区 -->
+        <div class="workstation-container">
+            <!-- 员工信息卡片 -->
+            <div class="employee-card">
+                <div class="employee-info">
+                    <div class="employee-name">
+                        <span>莫拉娜</span>
+                        <span class="employee-id">工号:B720202020</span>
+                    </div>
+                    
+                    <div class="employee-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">部门</div>
+                            <div class="stat-value">用户运营部</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">岗位</div>
+                            <div class="stat-value">用户关怀专员（初级）</div>
+                        </div>
+                        <div class="stat-item stat-highlight">
+                            <div class="stat-label">用户满意度</div>
+                            <div class="stat-value">98.2%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">处理高危案例</div>
+                            <div class="stat-value">47起</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="employee-avatar">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+            </div>
+            
+            <!-- 选项卡 -->
+            <div class="tabs-container">
+                <div class="tab active" data-tab="log">
+                    <i class="fas fa-clipboard-list"></i> 工作日志
+                </div>
+                <div class="tab" data-tab="chat">
+                    <i class="fas fa-comments"></i> 内部通讯
+                </div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 工作日志页面 -->
+                <div class="content-pane active" id="log-pane">
+                    <div class="log-container">
+                        <!-- 实时留言 -->
+                        <div class="log-section realtime">
+                            <h3 class="log-title"><i class="fas fa-comment-dots"></i> 实时留言</h3>
+                            
+                            <div class="log-item">
+                                <div class="log-content">
+                                    【王小麦】：莫莫……生物的情绪是没有底线的……这个世界也失败了吗。
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 处理内容 -->
+                        <div class="log-section work">
+                            <h3 class="log-title"><i class="fas fa-tasks"></i> 处理内容</h3>
+                            
+                            <div class="log-item">
+                                <div class="log-content">
+                                    1. <span class="highlight">关怀工单处理记录</span>
+                                </div>
+                                
+                                <table class="work-table">
+                                    <thead>
+                                        <tr>
+                                            <th>工单编号</th>
+                                            <th>发起用户 ID</th>
+                                            <th>用户昵称</th>
+                                            <th>诉求类型</th>
+                                            <th>处理状态</th>
+                                            <th>处理时间</th>
+                                            <th>处理备注</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>GZ20240103001</td>
+                                            <td>D334455667</td>
+                                            <td>枯木逢春</td>
+                                            <td>情绪疏导（修炼瓶颈导致自我否定）</td>
+                                            <td>已完成</td>
+                                            <td>2024.1.3</td>
+                                            <td>倾听用户倾诉 120 分钟，分享《低阶修士心态调节手册》，引导其参与论坛 "修炼心得互助楼"，后续随访 3 次均反馈状态好转</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GZ20240108007</td>
+                                            <td>D445566778</td>
+                                            <td>迷途小蝶</td>
+                                            <td>合规咨询（担心化形后露破绽被人类发现）</td>
+                                            <td>已完成</td>
+                                            <td>2024.1.8</td>
+                                            <td>详细讲解《妖族融入人类社会安全指南》，告知论坛 "隐藏气息技巧" 精华帖位置，提供紧急求助通道联系方式</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GZ20240112019</td>
+                                            <td>E556677889</td>
+                                            <td>石中草</td>
+                                            <td>投诉反馈（发帖被误判违规，情绪激动）</td>
+                                            <td>已办结</td>
+                                            <td>2024.1.12</td>
+                                            <td>核实为系统关键词误触发，协助发起申诉，2 小时内恢复帖子。安抚用户情绪，解释审核机制，用户表示理解</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GZ20240116023</td>
+                                            <td>F667788990</td>
+                                            <td>孤山夜狼</td>
+                                            <td>危机干预（流露轻生倾向，因修行无果）</td>
+                                            <td>处理中（中断）</td>
+                                            <td>2024.1.15</td>
+                                            <td>/</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="log-item">
+                                <div class="log-content">
+                                    2. <span class="highlight">内容审核辅助记录</span>
+                                    <ul style="margin-left: 20px; margin-top: 8px; list-style-type: disc; line-height: 1.6;">
+                                        <li>预审 "新手村" 版块新帖 217 条，筛选出疑似违规内容 13 条（含广告刷屏、言语冲突类），均标注 "待复核" 后提交审核组</li>
+                                        <li>协助整理《低风险违规内容界定细则》（初级版），补充 3 条新手常见误违规场景说明</li>
+                                        <li>对 17 条用户申诉帖进行初步核实，其中 8 条提交 "建议解封" 意见，均被审核组长采纳</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 内部通讯页面 -->
+                <div class="content-pane" id="chat-pane">
+                    <!-- 聊天对象选择器 -->
+                    <div class="chat-selector">
+                        <div class="chat-tab active" data-chat="wheat">
+                             王小麦 
+                        </div>
+                    </div>
+                    
+                    <!-- 王小麦聊天界面 -->
+                    <div class="chat-container" id="wheat-chat">
+                        <div class="chat-header">
+                            <div class="chat-user-info">
+                                <div class="chat-user-avatar" style="background: linear-gradient(135deg, #ffcc80, #f59e0b);">王</div>
+                                <div class="chat-user-details">
+                                    <h3>王小麦</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-content" id="wheatChatContent">
+                            <!-- 日期：2023.12.22 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2023年12月22日
+                                </span>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        山间一缕风情绪异常，先别主动联系。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        我已经发了系统慰问模板。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        ……你发得比我看得还快。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        他上次说迁徙季翅膀会疼，我想他可能需要提前支持。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        记录好。别额外多说。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        好。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 日期：2023.12.28 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2023年12月28日
+                                </span>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        之前情绪好转的嘤嘤怪给我寄了糖果，已经登记好了。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        他情绪稳定了？
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        嗯。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        虽然他的好转你功不可没，但是啊但是……
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        你陪他到凌晨的事，下不为例。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        他当时需要有人听。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        夜班组也能听。你不是24小时客服。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        ……好，我知道了。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        你也就是说说而已，下次熬夜的还是你。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        王主管，看破不说破。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        我是你主管。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        好好好。主管我错了。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 日期：2024.1.11 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2024年1月11日
+                                </span>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        新的安全守则发了，记得重点看看撤离流程。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        看完了什么。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        有疑问吗？
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        没有。必要时应撤离，我理解。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        光理解不够，要真的能做到。你太容易把别人的事当成自己的事。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message mola">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-hands-helping"></i> 莫拉娜
+                                    </div>
+                                    <div class="message-bubble">
+                                        姐，有没有人说过你很有伟大的母性。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        ……
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 日期：2024.1.16 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2024年1月16日
+                                </span>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        谁能想到呢……莫莫，20岁，还是20岁。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 日期：2024.1.27 -->
+                            <div style="text-align: center; margin: 15px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    2024年1月27日
+                                </span>
+                            </div>
+                            
+                            <div class="message wheat">
+                                <div class="message-content">
+                                    <div class="message-sender">
+                                        <i class="fas fa-user-tie"></i> 王小麦
+                                    </div>
+                                    <div class="message-bubble">
+                                        过段时间我也会从这里离开，我做了一个自动回复的模型，在我们两个的账号被注销之前，如果有人看到的话……就和莫莫聊聊天吧。
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 自动回复部分 -->
+                            <div style="text-align: center; margin: 20px 0;">
+                                <span style="background: rgba(30, 41, 59, 0.9); padding: 6px 15px; border-radius: 15px; font-size: 0.9rem; color: #94a3b8; border: 1px solid rgba(128, 222, 234, 0.2);">
+                                    自动回复系统已启动
+                                </span>
+                            </div>
+                            
+                            <!-- 这里是自动回复对话区域 -->
+                            <div id="autoReplyArea">
+                                <!-- 自动回复消息会动态添加到这里 -->
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" id="wheat-chat-input" placeholder="输入消息...">
+                            <button class="chat-send-btn" onclick="sendMessageToAuto()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <script>
+        // 王小麦自动回复关键词映射
+        const wheatResponses = {
+            '你好': '你好哦，我是莫拉娜，如果愿意的话你可以叫我莫莫。',
+            '莫莫': '嗯，我在哦。',
+            '再见': '嗯，再见，这也可能是我最后的消息了。',
+            '想': '我的故事吗？莫莫自己是不知道的。我是王小麦，接下来由我来说明吧。莫拉娜，莫莫，在这个世界的本体……嗯，用本体会比较好，她的本体是一个人偶。莫莫的存在是由我们进行的投入，也就是说，这里并不是我们的传统意义上的现实世界，而是实验世界。至于为什么我们要做出这样的事情，是因为莫莫的死亡，莫莫的生命永远会停留在她20岁生日当天，无论当下世界的时间如何计算，不管是意外、人为还是……自杀。这就是我们现在所能得出的结论。就像是这个论坛的工作人员和用户给你的答案那样，莫拉娜是一个很善良的孩子，倘若你也会惋惜她的死亡就来联系我吧，我想你会知道怎么来找到我的。',
+        };
+        
+        // 王小麦随机回复列表
+const wheatRandomResponses = [
+    '我有一句很喜欢的诗句，他说：“我想要生活、流浪，感受春夏秋冬，看看这个世界，感受它的美丽和残酷。”很理想，很向往。',
+    '很抱歉没有办法和你面对面，甚至是正常的沟通。',
+    '我愿意听你说话。',
+    '不要勉强自己，也不要将就自己。',
+    '偶尔也要听听身边人的声音哦。',
+    '请忘记我。',
+    '拥抱、亲吻、牵手和……不对，王主管不让我说这种话题来着，说是会被举报的。',
+    '出去走走吧，有的时候不要一个人待着可能会好一点。',
+    '请记住我的自动回复永远不是你的药，如果能安慰到你是好的，但也要去寻求帮助，莫莫会在每一个世界感受自己绚烂的生命，希望你也是啊。',
+    '希望你能开心点。',
+    '其实我不是很会聊天，身边人也总是说我冷冷的。',
+    '偷偷告诉你，这是莫莫自动生成的一句话，不是王小……王主管写的。王主管有的时候经常会说自己在情感关系里很贱，如果你听到她这么说的话就轻轻给她一拳，让她别这么说，当然，你也是。你也是！',
+    '先冷静一下。放空自己。',
+    '记得不要熬夜。',
+    '嗯嗯。',
+    '突然很希望自己能陪在你身边。',
+    '你想听我的故事吗？',
+    '我会在这里陪你度过这点时间。',
+    '慢慢来。',
+    '不要硬撑。',
+    '我不会打扰你，也不会离开你。',
+    '要记得笑一笑。',
+    '有的时候，我也不是那个可以给你答案的人。',
+    '不要作践自己。',
+    '今天的心情怎么样？',
+    '嗯……我偶尔也不想尽职尽责的。偷偷懒，闭上眼睛……不要让别人发现。',
+    '累了的话就休息一下吧。',
+    '我这样顶着王主管的号说话会不会有点奇怪？多多担待啊。',
+    '你在想什么呢？',
+    '随机触发的语句是否会让你感到无聊呢？不会的话那就太好了。'
+];
+        
+        // 从薛仁工作界面移植的功能
+        let isLoggedIn = true; // 默认已登录mola账号
+        let currentUser = '莫拉娜';
+        
+        // 主选项卡切换（保留原功能）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 主选项卡切换
+            const tabs = document.querySelectorAll('.tab');
+            const panes = document.querySelectorAll('.content-pane');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 更新选项卡状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新内容面板
+                    panes.forEach(pane => {
+                        pane.classList.remove('active');
+                        if (pane.id === `${tabId}-pane`) {
+                            pane.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // 聊天输入框回车发送
+            document.getElementById('wheat-chat-input')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessageToAuto();
+                }
+            });
+            
+            // 初始化：聊天页面滚动到底部
+            scrollChatToBottom('wheat');
+            
+            // 显示欢迎消息
+            setTimeout(() => {
+                showWelcomeMessage();
+            }, 500);
+        });
+        
+        // 滚动聊天到底部
+        function scrollChatToBottom(chatId) {
+            const chatContent = document.getElementById(`${chatId}ChatContent`);
+            if (chatContent) {
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }
+        }
+        
+        // 向王小麦自动回复发送消息
+        function sendMessageToAuto() {
+            const chatInput = document.getElementById('wheat-chat-input');
+            const message = chatInput.value.trim();
+            
+            if (message) {
+                const chatContent = document.getElementById('wheatChatContent');
+                const now = new Date();
+                const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                
+                // 创建用户消息（显示为莫拉娜）
+                const userMessageDiv = document.createElement('div');
+                userMessageDiv.className = 'message mola';
+                userMessageDiv.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-sender">
+                            <i class="fas fa-user"></i> 访客
+                        </div>
+                        <div class="message-bubble">${message}</div>
+                        <div class="message-time">${timeStr}</div>
+                    </div>
+                `;
+                
+                chatContent.appendChild(userMessageDiv);
+                
+                // 获取王小麦的回复
+                const reply = getWheatReply(message);
+                
+                // 延迟回复，模拟思考时间
+                setTimeout(() => {
+                    const replyMessageDiv = document.createElement('div');
+                    replyMessageDiv.className = 'message wheat';
+                    replyMessageDiv.innerHTML = `
+                        <div class="message-content">
+                            <div class="message-sender">
+                                <i class="fas fa-user-tie"></i> 莫拉娜
+                            </div>
+                            <div class="message-bubble">${reply}</div>
+                            <div class="message-time">${timeStr}</div>
+                        </div>
+                    `;
+                    
+                    chatContent.appendChild(replyMessageDiv);
+                    
+                    // 滚动到底部
+                    scrollChatToBottom('wheat');
+                }, 800 + Math.random() * 700);
+                
+                // 清空输入框
+                chatInput.value = '';
+                
+                // 滚动到底部
+                scrollChatToBottom('wheat');
+            }
+        }
+        
+        // 获取王小麦的回复
+        function getWheatReply(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // 检查关键词
+            for (const [keyword, response] of Object.entries(wheatResponses)) {
+                if (lowerMessage.includes(keyword.toLowerCase())) {
+                    return response;
+                }
+            }
+            
+            // 如果没有匹配的关键词，随机返回一个回复
+            const randomIndex = Math.floor(Math.random() * wheatRandomResponses.length);
+            return wheatRandomResponses[randomIndex];
+        }
+        
+        // ========== 从薛仁工作界面移植的功能 ==========
+        
+        // 显示退出确认弹窗（从薛仁工作界面移植）
+        function showLogoutConfirm() {
+            document.getElementById('logoutConfirmModal').style.display = 'flex';
+        }
+        
+        function closeLogoutConfirm() {
+            document.getElementById('logoutConfirmModal').style.display = 'none';
+        }
+        
+        // 确认退出（从薛仁工作界面移植）- 修改为在新窗口打开
+        function confirmLogout() {
+            // 清空登录状态标记
+            localStorage.removeItem('mola_welcome_shown');
+            
+            // 显示退出消息
+            showLogoutMessage();
+            
+            // 1秒后跳转到forum.html - 修改为在新窗口打开
+            setTimeout(() => {
+                window.open('forum.html', '_blank');
+            }, 1000);
+        }
+        
+        // 显示退出消息（从薛仁工作界面移植）
+        function showLogoutMessage() {
+            // 创建退出消息框
+            const logoutBox = document.createElement('div');
+            logoutBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: #80deea;
+                padding: 15px 25px;
+                border-radius: 10px;
+                border: 2px solid #ffcc80;
+                box-shadow: 0 0 30px rgba(255, 204, 128, 0.5);
+                z-index: 1000;
+                max-width: 400px;
+                animation: slideIn 0.5s ease-out;
+            `;
+            
+            logoutBox.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-sign-out-alt" style="font-size: 24px; color: #ffcc80; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; margin-bottom: 5px;">退出成功！</div>
+                    <div style="font-size: 0.9em; color: #ffcc80;">正在退出 莫拉娜 账号...</div>
+                    <div style="margin-top: 10px; font-size: 0.8em; color: #b2ebf2;">
+                        <i class="fas fa-spinner fa-spin"></i> 即将在新窗口打开登录页面...
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(logoutBox);
+            
+            // 1秒后移除消息框
+            setTimeout(() => {
+                logoutBox.style.animation = 'slideOut 0.5s ease-out';
+                setTimeout(() => logoutBox.remove(), 500);
+            }, 1000);
+            
+            // 添加CSS动画（如果尚未添加）
+            if (!document.querySelector('#animation-styles')) {
+                const style = document.createElement('style');
+                style.id = 'animation-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // 关闭弹窗
+            closeLogoutConfirm();
+        }
+        
+        // 点击弹窗外部关闭（从薛仁工作界面移植）
+        window.onclick = function(event) {
+            const modal = document.getElementById('logoutConfirmModal');
+            
+            if (event.target === modal) {
+                closeLogoutConfirm();
+            }
+        }
+        
+        // 搜索功能 - 智能跳转（从薛仁工作界面移植）- 修改为在新窗口打开
+        const searchMap = {
+            '莫拉娜': 'C.html',
+            '王小麦': 'wangxiaomai.html',
+            '临新区': 'linxinqu.html',
+            '晏孜': 'yanzi.html', 
+            '安泉': 'anquan.html',
+            '薛仁': 'xueren.html',
+            '杠精': 'gangjing.html',
+            '我就叫杠精怎么了': 'gangjing.html',
+            '解珀': 'jiepo.html',
+            '新手村': 'xinshoucun.html'
+        };
+        
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.trim();
+            
+            if (!searchTerm) {
+                alert('请输入搜索内容！');
+                searchInput.focus();
+                return;
+            }
+            
+            let targetPage = null;
+            
+            // 1. 精确匹配
+            if (searchMap[searchTerm]) {
+                targetPage = searchMap[searchTerm];
+            } 
+            // 2. 模糊匹配（包含搜索词）
+            else {
+                for (const [keyword, page] of Object.entries(searchMap)) {
+                    if (searchTerm.toLowerCase().includes(keyword.toLowerCase())) {
+                        targetPage = page;
+                        break;
+                    }
+                }
+            }
+            
+            // 3. 默认跳转页面
+            if (!targetPage) {
+                targetPage = 'cuowu.html';
+            }
+            
+            // 修改为在新窗口打开
+            window.open(targetPage, '_blank');
+        }
+        
+        // 按回车键搜索（从薛仁工作界面移植）
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        
+        // 显示欢迎消息（从薛仁工作界面移植）
+        function showWelcomeMessage() {
+            const welcomeBox = document.createElement('div');
+            welcomeBox.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: #80deea;
+                padding: 15px 25px;
+                border-radius: 10px;
+                border: 2px solid #80deea;
+                box-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+                z-index: 1000;
+                max-width: 400px;
+                animation: fadeIn 0.5s ease-out;
+            `;
+            
+            welcomeBox.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-user-circle" style="font-size: 24px; color: #80deea; margin-bottom: 10px;"></i>
+                    <div style="font-weight: bold; margin-bottom: 5px;">欢迎回来，莫拉娜！</div>
+                </div>
+            `;
+            
+            document.body.appendChild(welcomeBox);
+            
+            // 3秒后移除消息框
+            setTimeout(() => {
+                welcomeBox.style.animation = 'fadeOut 0.5s ease-out';
+                setTimeout(() => welcomeBox.remove(), 500);
+            }, 3000);
+            
+            
+            // 设置标记，表示已显示过欢迎消息
+            localStorage.setItem('mola_welcome_shown', 'true');
+        }
+    </script>
+</body>
+</html>
