@@ -778,7 +778,7 @@
         
         /* === 动画 === */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -1615,10 +1615,10 @@ const wheatRandomResponses = [
             // 初始化：聊天页面滚动到底部
             scrollChatToBottom('wheat');
             
-            // // 显示欢迎消息
-            // setTimeout(() => {
-            //     showWelcomeMessage();
-            // }, 500);
+            // 显示欢迎消息
+            setTimeout(() => {
+                showWelcomeMessage();
+            }, 500);
         });
         
         // 滚动聊天到底部
@@ -1866,7 +1866,7 @@ const wheatRandomResponses = [
                 box-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
                 z-index: 1000;
                 max-width: 400px;
-                animation: fadeIn 0.5s ease-out;
+                animation: FadeIn 0.5s ease-out;
             `;
             
             welcomeBox.innerHTML = `
@@ -1893,5 +1893,6 @@ const wheatRandomResponses = [
 </body>
 
 </html>
+
 
 
