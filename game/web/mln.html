@@ -37,6 +37,7 @@
             flex-direction: column;
             gap: 25px;
         }
+
         
         /* === 顶部论坛导航栏 === */
         .forum-header {
@@ -1879,7 +1880,8 @@ const wheatRandomResponses = [
             
             // 3秒后移除消息框
             setTimeout(() => {
-                welcomeBox.style.animation = 'fadeOut 0.5s ease-out';
+                welcomeBox.style.opacity = '0';
+                welcomeBox.style.transition = 'opacity 0.5s ease-out';
                 setTimeout(() => welcomeBox.remove(), 500);
             }, 3000);
             
@@ -1891,3 +1893,4 @@ const wheatRandomResponses = [
 </body>
 
 </html>
+
