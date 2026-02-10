@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帖子-有人知道这只小狐狸去了哪里吗？</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+            color: #80deea; 
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 172, 193, 0.3);
+        }
+        
+        /* 帖子内容 - 添加首行缩进 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+        }
+        
+        .post-content p {
+            margin-bottom: 15px;
+            text-indent: 2em; /* 首行缩进2个字符 */
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+        
+        /* 评论区域 */
+        .comments-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .comments-title {
+            color: #80deea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        /* 评论项 */
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.1);
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            color: #ffcc80;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .comment-content {
+            color: #b2ebf2;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        /* 回复评论 */
+        .comment-reply {
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #80deea;
+        }
+        
+        .comment-reply:last-child {
+            margin-bottom: 0;
+        }
+        
+        .reply-author {
+            color: #80deea;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .reply-content {
+            color: #b2ebf2;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        /* 点赞和回复图标（无功能）- 只保留评论部分的，回复部分已移除 */
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-icon {
+            color: #80deea;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+        }
+        
+        .action-icon i {
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+            }
+            
+            .comment-reply {
+                margin-left: 15px;
+                padding: 10px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .comment-actions {
+                flex-wrap: wrap;
+            }
+            
+            .comment-reply {
+                margin-left: 10px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 8px 10px;
+            }
+        }
+        
+        /* 特殊样式 - 突出显示重要信息 */
+        .important-info {
+            color: #ffcc80;
+            font-weight: bold;
+        }
+        
+        .highlight-text {
+            background: rgba(255, 204, 128, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border-left: 3px solid #ffcc80;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <h1 class="post-title">【有人知道这只小狐狸去了哪里吗？】</h1>
+            
+            <div class="post-content">
+                <p>我是在这个论坛里认识的一只小狐狸，她的账号名字叫雪尾，算起来认识也有小半年的时间了。最开始是因为在同一个兴趣帖子下互相留言搭话，后来慢慢熟悉起来，就经常在私信里分享日常的琐事，不管是遇到开心的事想找人分享，还是碰到烦心事想吐槽几句。之前我们还约好了，等开春之后要见面。</p>
+                
+                <p>可是就在这几天，她却突然像人间蒸发了一样，我从三天前开始给她发消息，她就没有回复了。我翻遍了她和我常逛的那几个版块，无论是她之前活跃的游戏讨论区，还是偶尔会去的生活闲聊楼，都再也没见过她的头像和足迹，就连帖子也没有更新过。我心里实在是忍不住担心，不知道她是不是遇到了什么急事，或者是生活里出了什么状况，毕竟她从来不会这么久不吭声。</p>
+                
+                <p>所以想来这里碰碰运气，问问大家有没有人最近还和她联系过，或者知道一点点关于她现实的线索，哪怕只是知道他所在的城市最近有没有什么特殊情况也好。如果有人了解任何相关的情况，麻烦在评论区告诉我一声，真的非常感谢各位。</p>
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    发布时间：<span class="post-date">2024.2.4</span>
+                </div>
+                <div class="post-author">
+                    发布人：<span class="author-name">月下</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 评论区域 -->
+        <div class="comments-container">
+            <h2 class="comments-title"><i class="far fa-comments"></i> 评论</h2>
+            
+            <!-- 评论1 -->
+            <div class="comment" id="comment1">
+                <div class="comment-author">山间一缕风</div>
+                <div class="comment-content">
+                    会不会是修行遇到瓶颈，暂时"断网"静心去了？我师父以前也常这样突然消失几个月……不过还是希望小狐狸早点平安回来。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 23
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">月下</div>
+                    <div class="reply-content">应该不会是，她一向很乐观，希望不是我的错觉。</div>
+                </div>
+            </div>
+            
+            <!-- 评论2 -->
+            <div class="comment" id="comment2">
+                <div class="comment-author">不想修炼的咸鱼</div>
+                <div class="comment-content">
+                    同担心……不过晏孜管理员刚发公告说系统被攻击过，会不会是账号异常被临时冻结了？或者密码重置后她还没改回来？
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 18
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论3 -->
+            <div class="comment" id="comment3">
+                <div class="comment-author">爱吃松子的松鼠</div>
+                <div class="comment-content">
+                    啊，是那只头像很可爱的狐狸姐姐！不过我没有什么信息……
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 12
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论4 -->
+            <div class="comment" id="comment4">
+                <div class="comment-author">神秘人</div>
+                <div class="comment-content">
+                    前段时间听我的前辈说，临新区有一只小狐狸成精了，他还去拜访过，或许能帮到你。不过世上许多狐狸，不一定就是你认识的这只。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 31
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">月下</div>
+                    <div class="reply-content">十分感谢！我会去打听一下的。</div>
+                </div>
+            </div>
+            
+            <!-- 评论5 -->
+            <div class="comment" id="comment5">
+                <div class="comment-author">猫猫天下第一</div>
+                <div class="comment-content">
+                    最近工作人员都因为年初的入侵忙飞了，不然@晏孜可能还会有用的。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 15
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        // 滚动效果
+        const comments = document.querySelectorAll('.comment');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        comments.forEach(comment => {
+            comment.style.opacity = '0';
+            comment.style.transform = 'translateY(20px)';
+            comment.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(comment);
+        });
+    </script>
+</body>
+</html>
