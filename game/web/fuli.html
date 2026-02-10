@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帖子-年终福利吐槽大会</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+           color: #80deea;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 172, 193, 0.3);
+        }
+        
+        /* 帖子内容 - 添加首行缩进 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+        }
+        
+        .post-content p {
+            margin-bottom: 15px;
+            text-indent: 2em; /* 首行缩进2个字符 */
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+        
+        /* 评论区域 */
+        .comments-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .comments-title {
+            color: #80deea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        /* 评论项 */
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.1);
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            color: #ffcc80;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .comment-content {
+            color: #b2ebf2;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        /* 回复评论 */
+        .comment-reply {
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #80deea;
+        }
+        
+        .comment-reply:last-child {
+            margin-bottom: 0;
+        }
+        
+        .reply-author {
+            color: #80deea;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .reply-content {
+            color: #b2ebf2;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        /* 点赞和回复图标（无功能）- 只保留评论部分的，回复部分已移除 */
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-icon {
+            color: #80deea;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+        }
+        
+        .action-icon i {
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+            }
+            
+            .comment-reply {
+                margin-left: 15px;
+                padding: 10px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .comment-actions {
+                flex-wrap: wrap;
+            }
+            
+            .comment-reply {
+                margin-left: 10px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <h1 class="post-title">年终福利吐槽大会：今年能逆袭吗？</h1>
+            
+            <div class="post-content">
+                <p>朋友们，又到了每年最让人牵肠挂肚的环节——年终福利盲盒开启倒计时！不知道大家是不是跟我一样，一边搬砖一边偷偷在心里列愿望清单，一边又忍不住回忆去年那波"反向操作"，至今想起来都五味杂陈。</p>
+                
+                <p>去年的福利，说多了都是泪。本以为能盼点实用又暖心的，结果到手一看，好家伙，一箱保质期过半的坚果礼盒和两提印着公司 logo 的定制纸巾，还有一张满 200 减 20 的超市优惠券，关键还是下个月才生效。当时拆开包装的瞬间，办公室里一片寂静，随后就是此起彼伏的苦笑，那场面，现在想起来都觉得又好笑又无奈。</p>
+                
+                <p>最绝的是那箱坚果，我拿回家后兴致勃勃地打开，结果发现里面的腰果都软了，核桃仁看着也不太新鲜。我家狗闻了一下扭头就走，连狗都不吃啊！至于那两提定制纸巾，上面巨大的公司logo和"拼搏奋进"的标语，让我每次用的时候都感觉自己还在加班，现在还剩一提半在家堆着，看着就心塞。</p>
+                
+                <p>优惠券就更别提了，满200减20还得下个月用，我特意记着日子去了趟超市，结果发现好多东西都涨价了，算下来根本没便宜多少。同事们都说，这波操作堪称"年度最抠门福利"，人力资源部怕不是对"惊喜"有什么误解。</p>
+                
+                <p>今年眼看着年关越来越近，行政部那边一点风声都没有，大家又开始交头接耳地猜起来了。有人信誓旦旦说看到行政小妹在统计大家衣服尺码，可能要发羽绒服；有人说财务那边最近在联系超市，说不定是购物卡；还有悲观派表示，看到仓库又进了一批包装盒，跟去年装坚果的盒子长得一模一样……</p>
+                
+                <p>说实话，我现在已经不敢抱太大希望了。经历了去年的"重创"，我对公司的福利想象力已经跌到谷底。只求今年别再来那些奇葩东西了，哪怕发点米面油这种刚需，也比过期坚果强啊！或者直接发钱，哪怕少点也行，至少实在。</p>
+                
+                <p>不过话又说回来，公司要是真能听到大家的心声，来波诚意满满的福利，那绝对能一扫去年的"意难平"，让大家过个好年。行政部的同事们，如果你们在看这个帖子，请听听群众的呼声吧！</p>
+                
+                <p>不说了，我得去祈祷了，希望今年别再收到印着公司logo的卫生纸了……</p>
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    发布时间：<span class="post-date">2023.12.15</span>
+                </div>
+                <div class="post-author">
+                    发布人：<span class="author-name">摸鱼第二名</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 评论区域 -->
+        <div class="comments-container">
+            <h2 class="comments-title"><i class="far fa-comments"></i> 评论</h2>
+            
+            <!-- 评论1 -->
+            <div class="comment" id="comment1">
+                <div class="comment-author">干饭仁</div>
+                <div class="comment-content">
+                    太懂这种痛了！我们公司去年发的定制雨伞，质量差到风一吹就折，后来下雨天我宁愿淋雨也不敢打那把伞，怕在街上当场表演"伞骨散架"。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 156
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论2 -->
+            <div class="comment" id="comment2">
+                <div class="comment-author">搬砖不加班</div>
+                <div class="comment-content">
+                    去年的坚果我家狗都不爱吃+1！今年能发点正常的吗？比如油米这种刚需也行啊！哪怕发箱牛奶呢？实用主义万岁！
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 203
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论3 -->
+            <div class="comment" id="comment3">
+                <div class="comment-author">打工鬼</div>
+                <div class="comment-content">
+                    去年那纸巾我现在还没用完，每次上厕所看到公司logo都觉得自己在给公司做免费宣传。今年只求别再来 logo 周边了，放过员工的家居用品吧！
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 187
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论4 -->
+            <div class="comment" id="comment4">
+                <div class="comment-author">还下不下雪了</div>
+                <div class="comment-content">
+                    今年福利据说调整了方案，但往年的"惊喜"太多，我是真不敢抱太大希望，别又是换汤不换药就谢天谢地了。行政部每次都说"听取大家意见"，结果听取了个寂寞。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 134
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">不是我说的</div>
+                    <div class="reply-content">哈哈哈哈楼主公司去年的操作也太窒息了，今年要是还这样，建议直接发钱好了，简单粗暴大家开心。</div>
+                </div>
+                
+                <!-- 回复2 -->
+                <div class="comment-reply">
+                    <div class="reply-author">还下不下雪了</div>
+                    <div class="reply-content">发钱？想都不敢想，公司能舍得发张面值正常点的购物卡，真不错了。我要求不高，别发那些占地方还没用的东西就行。</div>
+                </div>
+            </div>
+            
+            <!-- 评论5 -->
+            <div class="comment" id="comment5">
+                <div class="comment-author">办公室小灵通</div>
+                <div class="comment-content">
+                    我偷偷打听了，据说今年真的会调整！行政部老大被老板说了，去年员工满意度调查里福利这项得分太低。不过具体调成啥样还不知道，希望不是从"很差"变成"一般差"。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 98
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论6 -->
+            <div class="comment" id="comment6">
+                <div class="comment-author">福利预言家</div>
+                <div class="comment-content">
+                    盲猜今年还是礼盒+优惠券的老套路，最多换个包装。我们公司行政那帮人的创意已经枯竭了，去年是坚果，前年是红枣，大前年是木耳，全都是礼盒三件套。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 167
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论7 -->
+            <div class="comment" id="comment7">
+                <div class="comment-author">佛系打工人</div>
+                <div class="comment-content">
+                    我已经看开了，有总比没有强。虽然去年的坚果不好吃，但盒子还挺结实，我拿来装小东西了。纸巾虽然logo难看，但擦桌子还行。降低期待，就不会失望。
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 76
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">人间清醒</div>
+                    <div class="reply-content">姐妹你这心态真好，我得学习一下。不过还是希望公司能做个人，发点实用的。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        // 滚动效果
+        const comments = document.querySelectorAll('.comment');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        comments.forEach(comment => {
+            comment.style.opacity = '0';
+            comment.style.transform = 'translateY(20px)';
+            comment.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(comment);
+        });
+    </script>
+</body>
+</html>

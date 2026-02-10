@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索-自若雪乡记：寻访白叶村的静谧冬日</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+            color: #80deea;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(128, 222, 234, 0.3);
+        }
+        
+        /* 区域特色图标 */
+        .region-icon {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #80deea;
+            margin-bottom: 20px;
+        }
+        
+        /* 文章图片 */
+        .post-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(128, 222, 234, 0.3);
+            display: block;
+        }
+        
+        .image-caption {
+            text-align: center;
+            color: #b2ebf2;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        /* 帖子内容 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+            text-align: justify;
+        }
+        
+        .post-content p {
+            margin-bottom: 22px;
+            text-indent: 2em;
+        }
+        
+        /* 高亮关键词 */
+        .highlight {
+            color: #ffcc80;
+            font-weight: bold;
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+            margin-top: 20px;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+
+        /* 图片占位区域 */
+        .image-placeholder {
+            background: rgba(22, 33, 62, 0.3);
+            border-radius: 12px;
+            height: 350px;
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #80deea;
+        }
+
+        .placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .placeholder-text {
+            font-size: 1rem;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.5;
+            color: #b2ebf2;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+                margin-bottom: 18px;
+            }
+            
+            .region-icon {
+                font-size: 2rem;
+            }
+            
+            .post-image, .image-placeholder {
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+                margin-bottom: 15px;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .post-image, .image-placeholder {
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <div class="region-icon">
+                <i class="fas fa-snowflake"></i>
+            </div>
+            <h1 class="post-title">自若雪乡记：寻访白叶村的静谧冬日</h1>
+            <div class="post-content">
+                <p>坐落于<span class="highlight">自若区北部云雾山脉深处</span>的白叶村，是一片被时光温柔珍藏的传统山地聚落。村庄依山势而建，青瓦木墙的民居错落有致，完整的传统格局诉说着数百年的安居智慧。这里最为人称道的，是每年冬季如约而至的<span class="highlight">皑皑白雪</span>。从十一月底到次年三月，纷飞的雪花将群山、森林与屋檐染成一片纯净的银白，勾勒出<span class="highlight">"雪覆梯田、素裹古村"</span>的绝美景致，让这座自若区深处的村庄成为了令人向往的冬日秘境。</p>
+                
+                <p>白叶村的旅游体验，深深植根于这片土地的<span class="highlight">宁静节律</span>与<span class="highlight">生活传统</span>。游客可以漫步在积雪覆盖的静谧巷弄，感受远离尘嚣的安然；也可以向村民学习延续百年的积雪疏导方法，品尝用冬日窖藏食材烹制的家常暖锅，在火塘边聆听关于<span class="highlight">"雪后银狐"</span>的古老轶事。这份传说不仅为雪景增添了一抹灵动的色彩，更转化为生动的生态保育意识。当地在发展中始终恪守着保护的底线，通过科学的访客管理，让旅游活动与生态承载力、村民的日常生活和谐相融，确保了这片自若区后花园的纯净与安宁。</p>
+
+                <div class="image-placeholder">
+                    <div class="placeholder-icon">
+                    </div>
+                    <div class="placeholder-text">
+                        <br><img src="../resource/city2.png" alt="白叶村" class="post-image">
+                    </div>
+                </div>
+                
+                <p>如今，白叶村在自若区探索传统村落可持续发展的版图中，已成为一个生动的注脚。它在严格守护自身雪景风貌与生态肌理的同时，以细腻的方式承接八方来客。那些悄然融入古村肌理的现代旅居设施，让人们在享受温暖与便捷时，依然能倾听到雪落枝头的细微声响，感受到与自然同频呼吸的古老脉搏。</p>
+                
+                <p>这座自若区的雪乡将继续在<span class="highlight">保护与活化</span>之间寻找精妙的平衡，它不仅守护着一方永恒的冰雪画卷，更致力于为每一位寻访者提供一处能够安顿身心、连接传统与自然的<span class="highlight">诗意栖所</span>。</p>
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    信息更新时间：<span class="post-date">2023.12.20</span>
+                </div>
+                <div class="post-author">
+                    寻访记者：<span class="author-name">山野旅人</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        // 图片错误处理
+        const postImage = document.querySelector('.post-image');
+        if(postImage) {
+            postImage.onerror = function() {
+                this.style.display = 'none';
+                document.querySelector('.image-caption').innerHTML = '图片加载失败，请检查图片文件路径';
+                document.querySelector('.image-caption').style.color = '#ff6b6b';
+            };
+        }
+    </script>
+</body>
+</html>
