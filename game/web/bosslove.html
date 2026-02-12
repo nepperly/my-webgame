@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帖子-上司住我家之规矩成精怎么办</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-15px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 帖子容器 */
+        .post-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        
+        /* 帖子标题 */
+        .post-title {
+            color: #80deea; /* 安全主题颜色 */
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 172, 193, 0.5);
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 172, 193, 0.3);
+        }
+        
+        /* 帖子内容 - 添加首行缩进 */
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #b2ebf2;
+        }
+        
+        .post-content p {
+            margin-bottom: 15px;
+            text-indent: 2em; /* 首行缩进2个字符 */
+        }
+        
+        /* 帖子元信息 */
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #80deea;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #ffcc80;
+        }
+        
+        /* 评论区域 */
+        .comments-container {
+            background: rgba(16, 36, 64, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        .comments-title {
+            color: #80deea;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.2);
+        }
+        
+        /* 评论项 */
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(128, 222, 234, 0.1);
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-author {
+            color: #ffcc80;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .comment-content {
+            color: #b2ebf2;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid rgba(255, 204, 128, 0.3);
+        }
+        
+        /* 回复评论 */
+        .comment-reply {
+            margin-left: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #80deea;
+        }
+        
+        .comment-reply:last-child {
+            margin-bottom: 0;
+        }
+        
+        .reply-author {
+            color: #80deea;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .reply-content {
+            color: #b2ebf2;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        /* 点赞和回复图标（无功能）- 只保留评论部分的，回复部分已移除 */
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-icon {
+            color: #80deea;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.7;
+        }
+        
+        .action-icon i {
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.8em;
+            }
+            
+            .comment-reply {
+                margin-left: 15px;
+                padding: 10px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .post-title {
+                font-size: 1.6rem;
+            }
+            
+            .post-content p {
+                text-indent: 1.5em;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .comment-actions {
+                flex-wrap: wrap;
+            }
+            
+            .comment-reply {
+                margin-left: 10px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 帖子内容 -->
+        <div class="post-container">
+            <h1 class="post-title">上司住我家之规矩成精怎么办</h1>
+            
+            <div class="post-content">
+                <p>燕子和雪人的关系是什么样的？一个是春天和勤劳的象征，另一个则是冬天和欢乐，或许怎么想象好像也不是能够想到一起去的东西。</p>
+                
+                <p>所以，雪人怎么想也想不到为什么，他的上司燕子需要一个合租的室友。</p>
+                
+                <p>而他现在就站在了燕子的房子里，因为雪人确实对找到一个新房子处于一个窘迫的境地——他的房子就在今天早上他上班的时候因为隔壁着火被殃及了。好消息是没人出事，雪人甚至也没有损失什么财产，因为他也没有什么财产在家里。坏消息是，他很难在短时间里找到一个合适的住处，离露宿街头就要不远了。就在这个时候好巧不巧地让燕子遇到了在外游荡的自己，于是现在他就站在了这里。</p>
+                
+                <p>“雪人，你在门口愣着干什么呢？”燕子语气里带着他惯有的凌厉，“快点进来收拾，别堵在门口不知道干什么。”</p>
+                
+                <p>“哦哦，来了来了。”雪人连忙收起思绪，脸上堆起乖巧的笑，赶紧拎着自己的小行李箱迈进门，这时候他才真正地注意到燕子的房子是什么样子的。偌大的落地窗对着城市间的灯火，整个房子的配色是清冷色的，倒是和这位有些死板的上司完美符合。最后剩下的最大的印象是，干净，特别的干净，大理石瓷砖干净的反光都能看清雪人自己的脸。</p>
+                
+                <p>这和雪人的理想住所几乎一模一样，只不过雪人没有这个财力，也……很懒。</p>
+                
+                <p>燕子已经脱了外套挂了起来，回头看他一眼，没说话，从鞋柜里抽出双棉拖鞋，放在续任脚边。“换鞋，这双是新的。”雪人把自己的鞋脱下，把脚塞进拖鞋里。他的脚比拖鞋小了一小圈，走起来有些拖沓的感觉。燕子站着看了两眼，还是没说什么，自己径直往里走。“客厅公用，厨房你还是别乱动了，冰箱下格空出来了，你要是有什么想要放进去的东西就放那儿。阳台可以晾你的衣服，洗衣机就在那里。浴室热水器我会调到四十一度，你要是觉得温度不对就调一下，但是洗完了就调回去。”燕子的语速很快，像他们在开会的时候在过PPT。雪人跟在后面，手里攥着行李箱拉杆，拼命记，心里也拼了命地吐糟事情怎么这么多。</p>
+                
+                <p>“最后，”燕子停在走廊中间，侧过头去看雪人，“我的房间是那间，你的房间是这间。”他推开门，是个朝南的小卧室，没开灯，城市的光从窗户透进来，照着空荡荡的床板和一张书桌。“三件套在柜子里，自己铺一下。”</p>
+                
+                <p>燕子站着看了他几秒：“有什么问题再来找我。哦对了，除了加班，十点之后不要发出很大的动静可以吗？”</p>
+                
+                <p>“好的好的。”雪人恭恭敬敬，生怕哪里冒犯了自己的老大。燕子点点头。</p>
+                
+                <p>看着燕子转身关门，门外传来房门合上的声音，雪人瞬间长长地松了口气，肩膀也垮了下来，连呼吸都好像都变得顺畅了些。他拎着小小的行李箱，蹑手蹑脚挪进次卧，反手轻轻带上门，生怕动静大了惊动隔壁的燕子。一进门，他就瘫倒在床上，心里的吐槽瞬间翻涌而来，巴不得能在床上翻滚起来大闹一场，但又想起燕子的最后一句话还是没有动。雪人起身坐在床边，看着整洁的房间，想起燕子刚刚凌厉的语气和一堆繁杂的规矩，暗暗告诫自己以后要收敛性子，乖一点，勤快一点，千万不能惹这位上司生气，不然这份难得的落脚地，就真的保不住了。</p>
+            </div>
+            
+            <div class="post-meta">
+                <div class="post-info">
+                    发布时间：<span class="post-date">2023.4.3</span>
+                </div>
+                <div class="post-author">
+                    发布人：<span class="author-name">灵感来源于睡觉</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 评论区域 -->
+        <div class="comments-container">
+            <h2 class="comments-title"><i class="far fa-comments"></i> 评论</h2>
+            
+            <!-- 评论1 -->
+            <div class="comment" id="comment1">
+                <div class="comment-author">我家有只嘤嘤怪</div>
+                <div class="comment-content">
+                    蹲蹲
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 89
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">灵感来源于睡觉</div>
+                    <div class="reply-content">感谢蹲！会努力更的！</div>
+                </div>
+            </div> 
+           
+            <!-- 评论3 -->
+            <div class="comment" id="comment3">
+                <div class="comment-author">规矩真的好烦</div>
+                <div class="comment-content">
+                    这个上司燕子怎么跟我领导一样，语速快得像讲PPT，我ptsd了
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 103
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">灵感来源于睡觉</div>
+                    <div class="reply-content">是吧！燕子就是那种开会的画风！</div>
+                </div>
+            </div>
+            
+            <!-- 评论4 -->
+            <div class="comment" id="comment4">
+                <div class="comment-author">春天什么时候来</div>
+                <div class="comment-content">
+                    雪人住燕子家，莫名有种跨物种合租的感觉，蹲个后续看看会不会融化（不是
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 56
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 评论5 -->
+            <div class="comment" id="comment5">
+                <div class="comment-author">懒人自救指南</div>
+                <div class="comment-content">
+                    雪人说自己很懒……然后住进这么整洁的上司家，我感觉有好多故事可以写，楼主加油更！
+                </div>
+                <div class="comment-actions">
+                    <div class="action-icon">
+                        <i class="far fa-thumbs-up"></i> 38
+                    </div>
+                    <div class="action-icon">
+                        <i class="far fa-comment"></i> 回复
+                    </div>
+                </div>
+                
+                <!-- 回复1 -->
+                <div class="comment-reply">
+                    <div class="reply-author">灵感来源于睡觉</div>
+                    <div class="reply-content">懒人被规矩精制裁现场.jpg</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.onload = function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        };
+        
+        // 滚动效果
+        const comments = document.querySelectorAll('.comment');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        comments.forEach(comment => {
+            comment.style.opacity = '0';
+            comment.style.transform = 'translateY(20px)';
+            comment.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(comment);
+        });
+    </script>
+</body>
+</html>
